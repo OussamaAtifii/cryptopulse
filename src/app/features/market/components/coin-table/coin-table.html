@@ -10,32 +10,38 @@
     </tr>
   </thead>
   <tbody>
-    @for (coin of coins(); track coin.id) {
-      <tr>
-        <td>
-          <div class="flex items-center gap-4">
-            <div
-              class="flex justify-center items-center p-2 border border-outline-variant rounded-full bg-transparent">
-              <img
-                [src]="coin.image"
-                [alt]="coin.name + ' image'"
-                class="w-5 rounded-full" />
+    @if (coinGecko.marketCoins.isLoading()) {
+      @for (_ of [1, 2, 3, 4, 5]; track $index) {
+        <tr coinTableSkeleton></tr>
+      }
+    } @else {
+      @for (coin of coinGecko.marketCoins.value(); track coin.id) {
+        <tr>
+          <td>
+            <div class="flex items-center gap-4">
+              <div
+                class="flex justify-center items-center p-2 border border-outline-variant rounded-full bg-transparent">
+                <img
+                  [src]="coin.image"
+                  [alt]="coin.name + ' image'"
+                  class="w-5 rounded-full" />
+              </div>
+              <div>
+                <p class="font-semibold">{{ coin.name }}</p>
+                <p class="uppercase text-xs">{{ coin.symbol }}</p>
+              </div>
             </div>
-            <div>
-              <p class="font-semibold">{{ coin.name }}</p>
-              <p class="uppercase text-xs">{{ coin.symbol }}</p>
-            </div>
-          </div>
-        </td>
-        <td class="font-semibold">
-          {{ coin.current_price | currency: 'USD' }}
-        </td>
-        <td>
-          <app-price-change [percentage]="coin.price_change_percentage_24h" />
-        </td>
-        <td>{{ coin.market_cap | shortCurrency }}</td>
-        <td>{{ coin.total_volume | shortCurrency }}</td>
-      </tr>
+          </td>
+          <td class="font-semibold">
+            {{ coin.current_price | currency: 'USD' }}
+          </td>
+          <td>
+            <app-price-change [percentage]="coin.price_change_percentage_24h" />
+          </td>
+          <td>{{ coin.market_cap | shortCurrency }}</td>
+          <td>{{ coin.total_volume | shortCurrency }}</td>
+        </tr>
+      }
     }
   </tbody>
 </table>
