@@ -1,3 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import 'tailwindcss';
+
+main {
+  font-family: 'JetBrains Mono', monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@theme {
+  /* Primary */
+  --color-primary: #58a6ff;
+
+  /* Surface */
+  --color-surface: #0b141c;
+  --color-surface-dim: #0b141c;
+  --color-surface-bright: #313a43;
+
+  /* Surface Container */
+  --color-surface-container-lowest: #060f16;
+  --color-surface-container-low: #141c24;
+  --color-surface-container: #1c252e;
+  --color-surface-container-high: #262f38;
+  --color-surface-container-highest: #313a43;
+
+  /* On Surface */
+  --color-on-surface: #e2e2e5;
+  --color-on-surface-variant: #c1c7ce;
+
+  /* Outline */
+  --color-outline: #8b9198;
+  --color-outline-variant: #41484d;
+
+  /* Semantic */
+  --color-success: #00d67f;
+  --color-error: #ff4757;
+}

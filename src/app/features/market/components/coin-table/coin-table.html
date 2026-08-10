@@ -1,0 +1,41 @@
+<table
+  class="bg-surface-container-low w-full rounded-sm [&_tr]:border-b-2 [&_tr]:border-b-outline-variant [&_th]:py-3 [&_td]:px-4 [&_td]:py-3 [&_td]:text-right [&_th]:text-right [&_th]:font-normal [&_th:first-child]:text-left [&_th:first-child]:pl-4 [&_th:last-child]:pr-4 [&_td:first-child]:text-left text-sm text-on-surface">
+  <thead class="text-on-surface bg-surface-container">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>24h Change</th>
+      <th>Market Cap</th>
+      <th>Volume (24h)</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (coin of coins(); track coin.id) {
+      <tr>
+        <td>
+          <div class="flex items-center gap-4">
+            <div
+              class="flex justify-center items-center p-2 border border-outline-variant rounded-full bg-transparent">
+              <img
+                [src]="coin.image"
+                [alt]="coin.name + ' image'"
+                class="w-5 rounded-full" />
+            </div>
+            <div>
+              <p class="font-semibold">{{ coin.name }}</p>
+              <p class="uppercase text-xs">{{ coin.symbol }}</p>
+            </div>
+          </div>
+        </td>
+        <td class="font-semibold">
+          {{ coin.current_price | currency: 'USD' }}
+        </td>
+        <td>
+          <app-price-change [percentage]="coin.price_change_percentage_24h" />
+        </td>
+        <td>{{ coin.market_cap | shortCurrency }}</td>
+        <td>{{ coin.total_volume | shortCurrency }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
