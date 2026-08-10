@@ -1,6 +1,7 @@
+<app-coin-filters />
 <table
   class="bg-surface-container-low w-full rounded-sm [&_tr]:border-b-2 [&_tr]:border-b-outline-variant [&_th]:py-3 [&_td]:px-4 [&_td]:py-3 [&_td]:text-right [&_th]:text-right [&_th]:font-normal [&_th:first-child]:text-left [&_th:first-child]:pl-4 [&_th:last-child]:pr-4 [&_td:first-child]:text-left text-sm text-on-surface">
-  <thead class="text-on-surface bg-surface-container">
+  <thead class="text-on-surface">
     <tr>
       <th>Name</th>
       <th>Price</th>
@@ -15,7 +16,7 @@
         <tr coinTableSkeleton></tr>
       }
     } @else {
-      @for (coin of coinGecko.marketCoins.value(); track coin.id) {
+      @for (coin of coinGecko.filteredCoins(); track coin.id) {
         <tr>
           <td>
             <div class="flex items-center gap-4">
