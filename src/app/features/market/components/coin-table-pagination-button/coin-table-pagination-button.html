@@ -1,0 +1,6 @@
+<button
+  class="flex items-center justify-center size-10 border border-outline rounded-md text-outline hover:cursor-pointer hover:text-white hover:border-white transition-colors duration-200"
+  [class]="class()"
+  (click)="buttonClicked.emit()">
+  <ng-content />
+</button>

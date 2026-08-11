@@ -5,6 +5,7 @@ import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { PriceChange } from '@shared/ui/price-change/price-change';
 
 import { CoinFilters } from '../coin-filters/coin-filters';
+import { CoinTablePagination } from '../coin-table-pagination/coin-table-pagination';
 import { CoinTableSkeleton } from '../coin-table-skeleton/coin-table-skeleton';
 
 @Component({
@@ -15,6 +16,7 @@ import { CoinTableSkeleton } from '../coin-table-skeleton/coin-table-skeleton';
     CurrencyPipe,
     ShortCurrencyPipe,
     PriceChange,
+    CoinTablePagination,
   ],
   templateUrl: './coin-table.html',
 })

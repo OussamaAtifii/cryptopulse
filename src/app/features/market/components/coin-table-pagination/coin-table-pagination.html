@@ -1,0 +1,21 @@
+<div class="w-full flex items-center justify-end gap-2">
+  <app-coin-table-pagination-button (buttonClicked)="coinGecko.previousPage()">
+    <app-arrow-left-dashed />
+  </app-coin-table-pagination-button>
+
+  @for (item of [0, 1, 2, 3, 4]; track item) {
+    <app-coin-table-pagination-button
+      [class]="
+        coinGecko.page() === item
+          ? 'bg-primary text-white border-white font-semibold'
+          : ''
+      "
+      (buttonClicked)="changePage(item)">
+      {{ item + 1 }}
+    </app-coin-table-pagination-button>
+  }
+
+  <app-coin-table-pagination-button (buttonClicked)="coinGecko.nextPage()">
+    <app-arrow-right-dashed />
+  </app-coin-table-pagination-button>
+</div>

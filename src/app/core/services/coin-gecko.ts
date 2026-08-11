@@ -12,6 +12,8 @@ export class CoinGecko {
     sort: null,
   });
 
+  readonly page = signal<number>(0);
+
   private debouncedSearch = debounced(this.filters, 300);
 
   readonly filteredCoins = computed(() => {
@@ -48,11 +50,13 @@ export class CoinGecko {
     params: {
       vs_currency: 'usd',
       order: 'market_cap_desc',
+      page: this.page(),
       per_page: 5,
       sparkline: true,
     },
   }));
 
+  // Filters
   setFilter(filter: CoinFilters['filter']) {
     this.filters.update(value => ({
       ...value,
@@ -72,5 +76,24 @@ export class CoinGecko {
       ...value,
       sort: value.sort === 'losers' ? null : 'losers',
     }));
+  }
+
+  // Pagination
+  changePage(page: number): void {
+    if (page < 0) {
+      return this.page.set(0);
+    }
+
+    this.page.set(page);
+  }
+
+  nextPage() {
+    if (this.page() === 5) return;
+    this.page.update(page => page + 1);
+  }
+
+  previousPage() {
+    if (this.page() === 0) return;
+    this.page.update(page => page - 1);
   }
 }
