@@ -1,6 +1,14 @@
 <button
-  class="flex items-center justify-center size-10 border border-outline rounded-md text-outline hover:cursor-pointer hover:text-white hover:border-white transition-colors duration-200"
-  [class]="class()"
+  class="flex size-10 items-center justify-center rounded-md border border-outline-variant text-on-surface-variant transition-colors duration-200 hover:cursor-pointer hover:border-outline hover:bg-surface-container hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-outline-variant disabled:hover:bg-transparent disabled:hover:text-on-surface-variant"
+  [class.border-primary]="active()"
+  [class.bg-primary]="active()"
+  [class.text-surface]="active()"
+  [class.border-outline-variant]="!active()"
+  [class.text-on-surface-variant]="!active()"
+  [class.hover:border-outline]="!active()"
+  [class.hover:bg-surface-container]="!active()"
+  [class.hover:text-on-surface]="!active()"
+  [disabled]="disabled()"
   (click)="buttonClicked.emit()">
   <ng-content />
 </button>

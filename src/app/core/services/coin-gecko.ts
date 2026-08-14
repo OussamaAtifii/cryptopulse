@@ -88,7 +88,7 @@ export class CoinGecko {
   }
 
   nextPage() {
-    if (this.page() === 5) return;
+    if (this.page() === 4) return;
     this.page.update(page => page + 1);
   }
 

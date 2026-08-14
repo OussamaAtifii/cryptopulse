@@ -6,7 +6,8 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './coin-table-pagination-button.html',
 })
 export class CoinTablePaginationButton {
-  class = input<string>();
+  active = input(false);
+  disabled = input(false);
 
   buttonClicked = output();
 }
