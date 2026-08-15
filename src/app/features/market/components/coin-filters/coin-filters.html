@@ -6,16 +6,16 @@
     <button
       class="rounded-md border px-6 py-2 text-sm font-semibold transition hover:cursor-pointer"
       [class]="filterClass('gainers')"
-      [attr.aria-pressed]="coinGecko.filters().sort === 'gainers'"
-      (click)="coinGecko.changeTopGainers()">
+      [attr.aria-pressed]="marketState.sort() === 'gainers'"
+      (click)="marketState.changeTopGainers()">
       Top Gainers
     </button>
 
     <button
       class="rounded-md border px-6 py-2 text-sm font-semibold transition hover:cursor-pointer"
       [class]="filterClass('losers')"
-      [attr.aria-pressed]="coinGecko.filters().sort === 'losers'"
-      (click)="coinGecko.changeTopLosers()">
+      [attr.aria-pressed]="marketState.sort() === 'losers'"
+      (click)="marketState.changeTopLosers()">
       Top Losers
     </button>
 

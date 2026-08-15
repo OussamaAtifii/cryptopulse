@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CoinGecko } from '@core/services/coin-gecko';
+import { MarketState } from '@features/market/services/market-state';
 import { ArrowLeftDashed } from '@icons/arrow-left-dashed/arrow-left-dashed';
 import { ArrowRightDashed } from '@icons/arrow-right-dashed/arrow-right-dashed';
 
@@ -11,9 +11,9 @@ import { CoinTablePaginationButton } from '../coin-table-pagination-button/coin-
   templateUrl: './coin-table-pagination.html',
 })
 export class CoinTablePagination {
-  protected coinGecko = inject(CoinGecko);
+  protected marketState = inject(MarketState);
 
   changePage(page: number) {
-    this.coinGecko.changePage(page);
+    this.marketState.changePage(page);
   }
 }

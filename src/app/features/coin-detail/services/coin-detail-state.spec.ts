@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CoinGecko } from './coin-gecko';
+import { CoinDetailState } from './coin-detail-state';
 
-describe('CoinGecko', () => {
-  let service: CoinGecko;
+describe('CoinDetailState', () => {
+  let service: CoinDetailState;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CoinGecko);
+    service = TestBed.inject(CoinDetailState);
   });
 
   it('should be created', () => {

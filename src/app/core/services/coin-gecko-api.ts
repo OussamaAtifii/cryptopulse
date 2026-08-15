@@ -1,0 +1,34 @@
+import { httpResource } from '@angular/common/http';
+import { Service, Signal } from '@angular/core';
+import { Coin } from '@core/models/coin.model';
+import { CoinDetailResponse } from '@core/models/coin-detail-response.model';
+
+@Service()
+export class CoinGeckoApi {
+  private baseUrl = 'https://api.coingecko.com/api/v3';
+
+  getMarkets(params: { page: Signal<number> }) {
+    return httpResource<Coin[]>(() => ({
+      url: this.baseUrl + '/coins/markets',
+      params: {
+        vs_currency: 'usd',
+        order: 'market_cap_desc',
+        page: params.page(),
+        per_page: 5,
+        sparkline: true,
+      },
+    }));
+  }
+
+  getCoinDetail(id: Signal<string>) {
+    return httpResource<CoinDetailResponse>(() => ({
+      url: this.baseUrl + `/coins/${id()}`,
+      params: {
+        localization: false,
+        tickers: false,
+        community_data: false,
+        developer_data: false,
+      },
+    }));
+  }
+}

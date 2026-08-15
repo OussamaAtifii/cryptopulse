@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { CoinGecko } from '@core/services/coin-gecko';
+import { MarketState } from '@features/market/services/market-state';
 import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { PriceChange } from '@shared/ui/price-change/price-change';
@@ -23,5 +23,5 @@ import { CoinTableSkeleton } from '../coin-table-skeleton/coin-table-skeleton';
   templateUrl: './coin-table.html',
 })
 export class CoinTable {
-  coinGecko = inject(CoinGecko);
+  marketState = inject(MarketState);
 }

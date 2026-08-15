@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SortFilter } from '@core/models/coin-filters.model';
-import { CoinGecko } from '@core/services/coin-gecko';
+import { MarketState } from '@features/market/services/market-state';
 
 @Component({
   selector: 'app-coin-filters',
@@ -8,15 +8,15 @@ import { CoinGecko } from '@core/services/coin-gecko';
   templateUrl: './coin-filters.html',
 })
 export class CoinFilters {
-  protected coinGecko = inject(CoinGecko);
+  protected marketState = inject(MarketState);
 
   setFilter(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.coinGecko.setFilter(value);
+    this.marketState.setSearchText(value);
   }
 
   filterClass(filter: SortFilter) {
-    const isActive = this.coinGecko.filters().sort === filter;
+    const isActive = this.marketState.sort() === filter;
 
     return isActive
       ? 'bg-primary text-black border-primary'

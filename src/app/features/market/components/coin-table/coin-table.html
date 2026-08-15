@@ -13,12 +13,12 @@
         </tr>
       </thead>
       <tbody>
-        @if (coinGecko.marketCoins.isLoading()) {
+        @if (marketState.market.isLoading()) {
           @for (_ of [1, 2, 3, 4, 5]; track $index) {
             <tr coinTableSkeleton></tr>
           }
         } @else {
-          @for (coin of coinGecko.filteredCoins(); track coin.id) {
+          @for (coin of marketState.filteredCoins(); track coin.id) {
             <tr>
               <td>
                 <div class="flex items-center gap-4">
