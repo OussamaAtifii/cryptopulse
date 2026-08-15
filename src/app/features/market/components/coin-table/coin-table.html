@@ -22,13 +22,9 @@
             <tr>
               <td>
                 <div class="flex items-center gap-4">
-                  <div
-                    class="flex justify-center items-center p-2 border border-outline-variant rounded-full bg-transparent">
-                    <img
-                      [src]="coin.image"
-                      [alt]="coin.name + ' image'"
-                      class="w-5 rounded-full" />
-                  </div>
+                  <app-coin-icon
+                    [coinName]="coin.name"
+                    [coinImage]="coin.image" />
                   <div>
                     <p class="font-semibold">{{ coin.name }}</p>
                     <p class="uppercase text-xs">{{ coin.symbol }}</p>
