@@ -8,4 +8,8 @@ export class CoinDetailState {
   readonly coindId = signal<string>('');
 
   readonly coinDetail = this.coinGeckoApi.getCoinDetail(this.coindId);
+
+  setCoinId(coinId: string) {
+    this.coindId.set(coinId);
+  }
 }

@@ -8,4 +8,6 @@ import { Component, input } from '@angular/core';
 export class CoinIcon {
   coinImage = input.required<string>();
   coinName = input.required<string>();
+
+  size = input<'small' | 'big'>('small');
 }
