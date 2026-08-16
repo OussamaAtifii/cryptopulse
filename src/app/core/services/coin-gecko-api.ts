@@ -1,7 +1,9 @@
 import { httpResource } from '@angular/common/http';
 import { Service, Signal } from '@angular/core';
+import { ChartDays } from '@core/models/chart-days.model';
 import { Coin } from '@core/models/coin.model';
 import { CoinDetailResponse } from '@core/models/coin-detail-response.model';
+import { CoinPriceChart } from '@core/models/coin-price-chart.model';
 
 @Service()
 export class CoinGeckoApi {
@@ -28,6 +30,16 @@ export class CoinGeckoApi {
         tickers: false,
         community_data: false,
         developer_data: false,
+      },
+    }));
+  }
+
+  getCoinMarketChartData(id: Signal<string>, days: Signal<ChartDays>) {
+    return httpResource<CoinPriceChart>(() => ({
+      url: this.baseUrl + `/coins/${id()}/market_chart`,
+      params: {
+        vs_currency: 'usd',
+        days: days(),
       },
     }));
   }
