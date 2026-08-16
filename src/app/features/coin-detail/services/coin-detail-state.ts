@@ -7,7 +7,7 @@ export class CoinDetailState {
   private readonly coinGeckoApi = inject(CoinGeckoApi);
 
   readonly coindId = signal<string>('');
-  readonly chartDays = signal<ChartDays>(ChartDays['24h']);
+  readonly chartDays = signal<ChartDays>(ChartDays.OneDay);
 
   readonly coinDetail = this.coinGeckoApi.getCoinDetail(this.coindId);
   readonly coinPriceChartData = this.coinGeckoApi.getCoinMarketChartData(
@@ -17,5 +17,9 @@ export class CoinDetailState {
 
   setCoinId(coinId: string) {
     this.coindId.set(coinId);
+  }
+
+  setChartDays(days: ChartDays) {
+    this.chartDays.set(days);
   }
 }

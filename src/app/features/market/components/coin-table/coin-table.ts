@@ -1,5 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MarketState } from '@features/market/services/market-state';
 import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
@@ -24,4 +25,10 @@ import { CoinTableSkeleton } from '../coin-table-skeleton/coin-table-skeleton';
 })
 export class CoinTable {
   marketState = inject(MarketState);
+
+  private readonly router = inject(Router);
+
+  navigateToCoinDetail(coinId: string) {
+    this.router.navigate(['/market', 'coin', coinId]);
+  }
 }

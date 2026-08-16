@@ -2,8 +2,19 @@
   <app-detail-header />
   <div class="grid grid-cols-5">
     <div
-      class="col-span-3 p-4 border bg-surface-container-low border-outline-variant rounded-md">
-      <app-price-chart [data]="chartData()" />
+      class="flex flex-col col-span-3 border bg-surface-container-low border-outline-variant rounded-md">
+      <div class="flex gap-2 p-4 border-b border-outline-variant">
+        @for (item of ChartDays | keyvalue: originalOrder; track item.key) {
+          <app-button
+            [active]="coinDetailState.chartDays() === item.value"
+            (buttonClicked)="coinDetailState.setChartDays(item.value)">
+            {{ ChartDaysLabel[item.value] }}
+          </app-button>
+        }
+      </div>
+      <div class="p-4">
+        <app-price-chart [data]="chartData()" />
+      </div>
     </div>
   </div>
 </div>

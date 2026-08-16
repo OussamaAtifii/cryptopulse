@@ -1,21 +1,21 @@
 <div class="flex items-center justify-end gap-1.5">
-  <app-coin-table-pagination-button
+  <app-button
     (buttonClicked)="marketState.previousPage()"
     [disabled]="marketState.page() === 0">
     <app-arrow-left-dashed />
-  </app-coin-table-pagination-button>
+  </app-button>
 
   @for (item of [0, 1, 2, 3, 4]; track item) {
-    <app-coin-table-pagination-button
+    <app-button
       [active]="marketState.page() === item"
       (buttonClicked)="changePage(item)">
       {{ item + 1 }}
-    </app-coin-table-pagination-button>
+    </app-button>
   }
 
-  <app-coin-table-pagination-button
+  <app-button
     (buttonClicked)="marketState.nextPage()"
     [disabled]="marketState.page() === 4">
     <app-arrow-right-dashed />
-  </app-coin-table-pagination-button>
+  </app-button>
 </div>

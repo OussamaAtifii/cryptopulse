@@ -1,11 +1,11 @@
 import { Component, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-coin-table-pagination-button',
+  selector: 'app-button',
   imports: [],
-  templateUrl: './coin-table-pagination-button.html',
+  templateUrl: './button.html',
 })
-export class CoinTablePaginationButton {
+export class Button {
   active = input(false);
   disabled = input(false);
 

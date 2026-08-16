@@ -19,7 +19,9 @@
           }
         } @else {
           @for (coin of marketState.filteredCoins(); track coin.id) {
-            <tr>
+            <tr
+              (click)="navigateToCoinDetail(coin.id)"
+              class="hover:cursor-pointer hover:bg-surface-container transition-colors duration-200">
               <td>
                 <div class="flex items-center gap-4">
                   <app-coin-icon
