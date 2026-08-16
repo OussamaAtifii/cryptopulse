@@ -1,5 +1,10 @@
 <div class="flex flex-col gap-12">
-  <app-detail-header />
+  @if (coinDetailState.coinPriceChartData.isLoading()) {
+    <app-detail-header-skeleton />
+  } @else {
+    <app-detail-header />
+  }
+
   <div class="grid grid-cols-5">
     <div
       class="flex flex-col col-span-3 border bg-surface-container-low border-outline-variant rounded-md">

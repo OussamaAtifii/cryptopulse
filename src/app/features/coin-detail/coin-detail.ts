@@ -7,11 +7,18 @@ import { PriceChart } from '@shared/ui/price-chart/price-chart';
 import dayjs from 'dayjs';
 
 import { DetailHeader } from './components/detail-header/detail-header';
+import { DetailHeaderSkeleton } from './components/detail-header-skeleton/detail-header-skeleton';
 import { CoinDetailState } from './services/coin-detail-state';
 
 @Component({
   selector: 'app-coin-detail',
-  imports: [DetailHeader, PriceChart, Button, KeyValuePipe],
+  imports: [
+    DetailHeader,
+    PriceChart,
+    Button,
+    KeyValuePipe,
+    DetailHeaderSkeleton,
+  ],
   templateUrl: './coin-detail.html',
 })
 export class CoinDetail {
