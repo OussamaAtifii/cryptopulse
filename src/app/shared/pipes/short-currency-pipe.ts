@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'shortCurrency',
 })
 export class ShortCurrencyPipe implements PipeTransform {
-  transform(value: number): string {
+  transform(value?: number): string {
     if (!value || isNaN(Number(value))) return '';
 
     if (value >= 1000000000000) {

@@ -5,7 +5,7 @@
     <app-detail-header />
   }
 
-  <div class="grid grid-cols-5">
+  <div class="grid grid-cols-5 gap-8">
     <div
       class="flex flex-col col-span-3 border bg-surface-container-low border-outline-variant rounded-md">
       <div class="flex gap-2 p-4 border-b border-outline-variant">
@@ -19,6 +19,31 @@
       </div>
       <div class="p-4">
         <app-price-chart [data]="chartData()" />
+      </div>
+    </div>
+    <div
+      class="col-span-2 rounded-lg border border-outline-variant bg-surface-container-low p-5 text-on-surface">
+      <h2 class="mb-5 text-lg font-semibold">Market Statistics</h2>
+
+      <div class="divide-y divide-outline-variant">
+        <app-statistic-item
+          title="Market Cap"
+          [value]="
+            coinDetailState.coinDetail.value()?.market_data?.market_cap?.['usd']
+              | shortCurrency
+          ">
+          <app-coins icon class="size-5 text-primary" />
+        </app-statistic-item>
+
+        <app-statistic-item
+          title="24h Volume"
+          [value]="
+            coinDetailState.coinDetail.value()?.market_data?.total_volume?.[
+              'usd'
+            ] | shortCurrency
+          ">
+          <app-chart-bar icon class="size-5 text-primary" />
+        </app-statistic-item>
       </div>
     </div>
   </div>

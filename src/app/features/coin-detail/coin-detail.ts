@@ -2,12 +2,16 @@ import { KeyValue, KeyValuePipe } from '@angular/common';
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { ChartDays, ChartDaysLabel } from '@core/models/chart-days.model';
 import { PricePoint } from '@core/models/price-point.model';
+import { ChartBar } from '@icons/chart-bar/chart-bar';
+import { Coins } from '@icons/coins/coins';
+import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { Button } from '@shared/ui/button/button';
 import { PriceChart } from '@shared/ui/price-chart/price-chart';
 import dayjs from 'dayjs';
 
 import { DetailHeader } from './components/detail-header/detail-header';
 import { DetailHeaderSkeleton } from './components/detail-header-skeleton/detail-header-skeleton';
+import { StatisticItem } from './components/statistic-item/statistic-item';
 import { CoinDetailState } from './services/coin-detail-state';
 
 @Component({
@@ -16,8 +20,12 @@ import { CoinDetailState } from './services/coin-detail-state';
     DetailHeader,
     PriceChart,
     Button,
-    KeyValuePipe,
     DetailHeaderSkeleton,
+    KeyValuePipe,
+    ShortCurrencyPipe,
+    StatisticItem,
+    Coins,
+    ChartBar,
   ],
   templateUrl: './coin-detail.html',
 })
