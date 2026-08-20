@@ -1,9 +1,18 @@
-import { KeyValue, KeyValuePipe } from '@angular/common';
+import {
+  CurrencyPipe,
+  DecimalPipe,
+  KeyValue,
+  KeyValuePipe,
+} from '@angular/common';
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { ChartDays, ChartDaysLabel } from '@core/models/chart-days.model';
 import { PricePoint } from '@core/models/price-point.model';
 import { ChartBar } from '@icons/chart-bar/chart-bar';
+import { ChartLine } from '@icons/chart-line/chart-line';
+import { ChevronsDown } from '@icons/chevrons-down/chevrons-down';
+import { ChevronsUp } from '@icons/chevrons-up/chevrons-up';
 import { Coins } from '@icons/coins/coins';
+import { Refresh } from '@icons/refresh/refresh';
 import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { Button } from '@shared/ui/button/button';
 import { PriceChart } from '@shared/ui/price-chart/price-chart';
@@ -22,10 +31,16 @@ import { CoinDetailState } from './services/coin-detail-state';
     Button,
     DetailHeaderSkeleton,
     KeyValuePipe,
+    CurrencyPipe,
     ShortCurrencyPipe,
+    DecimalPipe,
     StatisticItem,
     Coins,
     ChartBar,
+    Refresh,
+    ChevronsUp,
+    ChevronsDown,
+    ChartLine,
   ],
   templateUrl: './coin-detail.html',
 })
@@ -40,6 +55,8 @@ export class CoinDetail {
   constructor() {
     effect(() => this.coinDetailState.setCoinId(this.id()));
   }
+
+  coin = computed(() => this.coinDetailState.coinDetail.value());
 
   chartData = computed<PricePoint[]>(() => {
     const prices = this.coinDetailState.coinPriceChartData.value()?.prices;

@@ -5,9 +5,9 @@
     <app-detail-header />
   }
 
-  <div class="grid grid-cols-5 gap-8">
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-5">
     <div
-      class="flex flex-col col-span-3 border bg-surface-container-low border-outline-variant rounded-md">
+      class="flex flex-col lg:col-span-3 border bg-surface-container-low border-outline-variant rounded-md">
       <div class="flex gap-2 p-4 border-b border-outline-variant">
         @for (item of ChartDays | keyvalue: originalOrder; track item.key) {
           <app-button
@@ -22,15 +22,14 @@
       </div>
     </div>
     <div
-      class="col-span-2 rounded-lg border border-outline-variant bg-surface-container-low p-5 text-on-surface">
+      class="lg:col-span-2 rounded-lg border border-outline-variant bg-surface-container-low p-5 text-on-surface">
       <h2 class="mb-5 text-lg font-semibold">Market Statistics</h2>
 
-      <div class="divide-y divide-outline-variant">
+      <div class="flex flex-col gap-3 divide-y divide-outline-variant">
         <app-statistic-item
           title="Market Cap"
           [value]="
-            coinDetailState.coinDetail.value()?.market_data?.market_cap?.['usd']
-              | shortCurrency
+            (coin()?.market_data?.market_cap?.['usd'] | shortCurrency) ?? '--'
           ">
           <app-coins icon class="size-5 text-primary" />
         </app-statistic-item>
@@ -38,11 +37,40 @@
         <app-statistic-item
           title="24h Volume"
           [value]="
-            coinDetailState.coinDetail.value()?.market_data?.total_volume?.[
-              'usd'
-            ] | shortCurrency
+            (coin()?.market_data?.total_volume?.['usd'] | shortCurrency) ?? '--'
           ">
           <app-chart-bar icon class="size-5 text-primary" />
+        </app-statistic-item>
+
+        <app-statistic-item
+          title="Circulating Supply"
+          [value]="
+            (coin()?.market_data?.circulating_supply | shortCurrency) +
+            ' ' +
+            coin()?.symbol
+          ">
+          <app-refresh icon class="size-5 text-primary" />
+        </app-statistic-item>
+
+        <app-statistic-item
+          title="All-Time High"
+          [value]="(coin()?.market_data?.ath?.['usd'] | currency) ?? '--'">
+          <app-chevrons-up icon class="size-5 text-primary" />
+        </app-statistic-item>
+
+        <app-statistic-item
+          title="All-Time Low"
+          [value]="(coin()?.market_data?.atl?.['usd'] | currency) ?? '--'">
+          <app-chevrons-down icon class="size-5 text-primary" />
+        </app-statistic-item>
+
+        <app-statistic-item
+          title="24h Price Change"
+          [value]="
+            ((coin()?.market_data?.price_change_percentage_24h
+              | number: '1.2-2') ?? '--') + '%'
+          ">
+          <app-chart-line icon class="size-5 text-primary" />
         </app-statistic-item>
       </div>
     </div>
