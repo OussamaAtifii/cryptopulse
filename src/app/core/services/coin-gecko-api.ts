@@ -22,25 +22,33 @@ export class CoinGeckoApi {
     }));
   }
 
-  getCoinDetail(id: Signal<string>) {
-    return httpResource<CoinDetailResponse>(() => ({
-      url: this.baseUrl + `/coins/${id()}`,
-      params: {
-        localization: false,
-        tickers: false,
-        community_data: false,
-        developer_data: false,
-      },
-    }));
+  getCoinDetail(id: Signal<string | null>) {
+    return httpResource<CoinDetailResponse>(() => {
+      if (!id()) return undefined;
+
+      return {
+        url: this.baseUrl + `/coins/${id()}`,
+        params: {
+          localization: false,
+          tickers: false,
+          community_data: false,
+          developer_data: false,
+        },
+      };
+    });
   }
 
-  getCoinMarketChartData(id: Signal<string>, days: Signal<ChartDays>) {
-    return httpResource<CoinPriceChart>(() => ({
-      url: this.baseUrl + `/coins/${id()}/market_chart`,
-      params: {
-        vs_currency: 'usd',
-        days: days(),
-      },
-    }));
+  getCoinMarketChartData(id: Signal<string | null>, days: Signal<ChartDays>) {
+    return httpResource<CoinPriceChart>(() => {
+      if (!id()) return undefined;
+
+      return {
+        url: this.baseUrl + `/coins/${id()}/market_chart`,
+        params: {
+          vs_currency: 'usd',
+          days: days(),
+        },
+      };
+    });
   }
 }
