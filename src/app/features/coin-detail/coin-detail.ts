@@ -20,7 +20,9 @@ import dayjs from 'dayjs';
 
 import { DetailHeader } from './components/detail-header/detail-header';
 import { DetailHeaderSkeleton } from './components/detail-header-skeleton/detail-header-skeleton';
+import { DetailSkeleton } from './components/price-chart-skeleton/price-chart-skeleton';
 import { StatisticItem } from './components/statistic-item/statistic-item';
+import { StatisticsSkeleton } from './components/statistics-skeleton/statistics-skeleton';
 import { CoinDetailState } from './services/coin-detail-state';
 
 @Component({
@@ -41,6 +43,8 @@ import { CoinDetailState } from './services/coin-detail-state';
     ChevronsUp,
     ChevronsDown,
     ChartLine,
+    StatisticsSkeleton,
+    DetailSkeleton,
   ],
   templateUrl: './coin-detail.html',
 })

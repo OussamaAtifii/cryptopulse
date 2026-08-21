@@ -40,6 +40,8 @@ export class PriceChart {
     afterNextRender(() => {
       this.initChart();
       this.setupResizeObserver();
+
+      this.updateChart(this.data());
     });
 
     effect(() => {
@@ -49,14 +51,22 @@ export class PriceChart {
         return;
       }
 
-      this.series.setData(points as LineData[]);
-      this.chart?.timeScale().fitContent();
+      this.updateChart(points);
     });
 
     this.destroyRef.onDestroy(() => {
       this.resizeObserver?.disconnect();
       this.chart?.remove();
     });
+  }
+
+  private updateChart(points: PricePoint[]): void {
+    if (!this.series) {
+      return;
+    }
+
+    this.series.setData(points as LineData[]);
+    this.chart?.timeScale().fitContent();
   }
 
   private initChart(): void {
