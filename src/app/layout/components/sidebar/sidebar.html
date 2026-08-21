@@ -1,2 +1,15 @@
-<aside class="w-3xs h-full bg-surface-container-low border-r-2 border-r-outline-variant">
+<aside
+  class="flex h-full w-3xs flex-col border-r border-r-outline-variant bg-surface-container-low px-4 py-5">
+  <div class="mb-8 px-2">
+    <span
+      class="text-2xl font-semibold tracking-tight text-on-surface font-sora">
+      Crypto Pulse
+    </span>
+  </div>
+
+  <nav class="flex flex-col gap-2">
+    @for (item of sidebarItems; track $index) {
+      <app-sidebar-item [item]="item" />
+    }
+  </nav>
 </aside>

@@ -2,7 +2,7 @@
   <app-button
     (buttonClicked)="marketState.previousPage()"
     [disabled]="marketState.page() === 0">
-    <app-arrow-left-dashed />
+    <app-arrow-left-dashed class="size-4" />
   </app-button>
 
   @for (item of [0, 1, 2, 3, 4]; track item) {
@@ -16,6 +16,6 @@
   <app-button
     (buttonClicked)="marketState.nextPage()"
     [disabled]="marketState.page() === 4">
-    <app-arrow-right-dashed />
+    <app-arrow-right-dashed class="size-4" />
   </app-button>
 </div>
