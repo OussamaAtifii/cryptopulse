@@ -11,6 +11,7 @@ export class MarketState {
   readonly debouncedSearch = debounced(this.searchText, 300);
 
   readonly market = this.coinGeckoApi.getMarkets({ page: this.page });
+  readonly geckoGlobal = this.coinGeckoApi.getGlobal();
 
   readonly filteredCoins = computed(() => {
     const coins = this.market.value() ?? [];

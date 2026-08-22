@@ -8,6 +8,11 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       {
+        path: '',
+        redirectTo: '/market',
+        pathMatch: 'full',
+      },
+      {
         path: 'market',
         loadChildren: () =>
           import('@features/market/routes/market.routes').then(

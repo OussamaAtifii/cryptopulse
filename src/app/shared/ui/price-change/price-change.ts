@@ -10,6 +10,7 @@ export class PriceChange {
   percentage = input.required<number>();
 
   isNegative = computed(() => this.percentage() < 0);
+  isZero = computed(() => this.percentage() === 0);
 
   percentageIcon = computed(() => {
     if (this.percentage() === 0) return '';
@@ -17,7 +18,13 @@ export class PriceChange {
     return this.isNegative() ? '↓' : '↑';
   });
 
-  percentageClass = computed(() =>
-    this.isNegative() ? 'text-error bg-error/10' : 'text-success bg-success/10'
-  );
+  percentageClass = computed(() => {
+    if (this.isZero()) {
+      return 'text-on-surface-variant bg-surface-container';
+    }
+
+    return this.isNegative()
+      ? 'text-error bg-error/10'
+      : 'text-success bg-success/10';
+  });
 }

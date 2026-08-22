@@ -4,6 +4,7 @@ import { ChartDays } from '@core/models/chart-days.model';
 import { Coin } from '@core/models/coin.model';
 import { CoinDetailResponse } from '@core/models/coin-detail-response.model';
 import { CoinPriceChart } from '@core/models/coin-price-chart.model';
+import { GeckoGlobalResponse } from '@core/models/gecko-global-response.model';
 
 @Service()
 export class CoinGeckoApi {
@@ -48,6 +49,14 @@ export class CoinGeckoApi {
           vs_currency: 'usd',
           days: days(),
         },
+      };
+    });
+  }
+
+  getGlobal() {
+    return httpResource<GeckoGlobalResponse>(() => {
+      return {
+        url: this.baseUrl + `/global`,
       };
     });
   }
