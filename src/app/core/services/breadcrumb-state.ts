@@ -18,9 +18,9 @@ export class BreadcrumbState {
   constructor() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() =>
-        this._breadcrumbs.set(this.buildBreadcrumbs(this.activatedRoute, ''))
-      );
+      .subscribe(() => {
+        this._breadcrumbs.set(this.buildBreadcrumbs(this.activatedRoute, ''));
+      });
   }
 
   private buildBreadcrumbs(
@@ -48,7 +48,9 @@ export class BreadcrumbState {
           ? breadcrumb(child.snapshot.params)
           : breadcrumb;
 
-      if (label) {
+      const last = breadcrumbs[breadcrumbs.length - 1];
+
+      if (label && last?.url !== url) {
         breadcrumbs.push({ label: label, url });
       }
 

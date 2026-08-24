@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-
-import { MainLayout } from './layout/main-layout/main-layout';
+import { MainLayout } from '@layout/main-layout/main-layout';
 
 export const routes: Routes = [
   {
@@ -14,10 +13,24 @@ export const routes: Routes = [
       },
       {
         path: 'market',
-        loadChildren: () =>
-          import('@features/market/routes/market.routes').then(
-            m => m.marketRoutes
-          ),
+        data: { breadcrumb: 'market' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('@features/market/market').then(m => m.Market),
+          },
+          {
+            path: 'coin/:id',
+            loadComponent: () =>
+              import('@features/coin-detail/coin-detail').then(
+                m => m.CoinDetail
+              ),
+            data: {
+              breadcrumb: (params: Record<string, string>) => params['id'],
+            },
+          },
+        ],
       },
     ],
   },
