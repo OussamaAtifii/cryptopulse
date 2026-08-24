@@ -1,8 +1,13 @@
+<div class="flex min-h-screen bg-surface">
+  <app-sidebar />
 
-    <div class="flex min-h-screen bg-surface">
-      <app-sidebar />
-
-      <main class="flex-1 p-8">
-        <router-outlet />
-      </main>
+  <main class="flex-1">
+    <header
+      class="flex items-center min-h-20 px-8 py-4 border-b border-outline-variant">
+      <app-breadcrumbs />
+    </header>
+    <div class="p-8">
+      <router-outlet />
     </div>
+  </main>
+</div>

@@ -1,0 +1,19 @@
+<nav class="flex items-center gap-2 text-sm">
+  @for (breadcrumb of breadcrumbState.breadcrumbs(); track breadcrumb.url) {
+    @if (!$first) {
+      <span class="text-outline">/</span>
+    }
+
+    @if ($last) {
+      <span class="font-medium text-on-surface capitalize">
+        {{ breadcrumb.label }}
+      </span>
+    } @else {
+      <a
+        [routerLink]="breadcrumb.url"
+        class="text-on-surface-variant capitalize transition-colors hover:text-primary">
+        {{ breadcrumb.label }}
+      </a>
+    }
+  }
+</nav>
