@@ -2,6 +2,11 @@
   [routerLink]="item().route"
   routerLinkActive="active bg-primary/10 text-primary border-s-primary"
   class="group flex h-12 items-center gap-3 rounded-r-md border-s-2 border-transparent px-3 text-on-surface-variant transition-colors duration-150 font-sora hover:bg-surface-container hover:text-on-surface [&.active:hover]:bg-primary/10 [&.active:hover]:text-primary">
-  <app-chart-bar class="size-5 shrink-0" />
-  <span class="text-base font-medium">{{ item().title }}</span>
+  <!-- Icon -->
+  <ng-container
+    [ngComponentOutlet]="item().icon"
+    [ngComponentOutletInputs]="{ class: 'size-5 shrink-0' }" />
+
+  <!-- Title -->
+  <span class="text-base font-medium tracking-tight">{{ item().title }}</span>
 </a>

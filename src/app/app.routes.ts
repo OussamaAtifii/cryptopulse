@@ -32,6 +32,12 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'portfolio',
+        loadComponent: () =>
+          import('@features/portfolio/portfolio').then(m => m.Portfolio),
+        data: { breadcrumb: 'portfolio' },
+      },
     ],
   },
 ];

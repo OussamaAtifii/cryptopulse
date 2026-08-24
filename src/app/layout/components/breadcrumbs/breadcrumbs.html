@@ -1,7 +1,7 @@
-<nav class="flex items-center gap-2 text-sm">
+<nav class="flex items-center justify-center gap-2 text-sm">
   @for (breadcrumb of breadcrumbState.breadcrumbs(); track breadcrumb.url) {
     @if (!$first) {
-      <span class="text-outline">/</span>
+      <app-chevron-right class="size-3.5 text-outline" />
     }
 
     @if ($last) {
