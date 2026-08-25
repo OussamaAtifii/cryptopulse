@@ -4,12 +4,13 @@ import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 
 import { CoinTable } from './components/coin-table/coin-table';
 import { KpiItem } from './components/kpi-item/kpi-item';
+import { KpiItemSkeleton } from './components/kpi-item-skeleton/kpi-item-skeleton';
 import { MarketKpi } from './models/market-kpi.model';
 import { MarketState } from './services/market-state';
 
 @Component({
   selector: 'app-market',
-  imports: [CoinTable, KpiItem],
+  imports: [CoinTable, KpiItem, KpiItemSkeleton],
   templateUrl: './market.html',
 })
 export class Market {

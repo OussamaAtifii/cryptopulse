@@ -1,7 +1,13 @@
 <div class="flex flex-col gap-8">
   <div class="grid grid-cols-3 gap-8">
-    @for (kpi of kpis(); track $index) {
-      <app-kpi-item [kpi]="kpi" />
+    @if (marketState.geckoGlobal.isLoading()) {
+      @for (kpi of [0, 1, 2]; track $index) {
+        <app-kpi-item-skeleton />
+      }
+    } @else {
+      @for (kpi of kpis(); track $index) {
+        <app-kpi-item [kpi]="kpi" />
+      }
     }
   </div>
 
