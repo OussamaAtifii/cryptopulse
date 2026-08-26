@@ -1,11 +1,13 @@
 <div
-  class="bg-surface-container p-6 flex justify-between items-center font-sora">
-  <div>
-    <h2 class="text-2xl text-white font-semibold">Market Trends</h2>
-  </div>
-  <div class="flex gap-4">
+  class="flex flex-col gap-4 bg-surface-container p-4 font-sora sm:p-5 md:flex-row md:items-center md:justify-between md:gap-6">
+  <h2 class="text-lg font-semibold text-white sm:text-xl md:text-2xl">
+    Market Trends
+  </h2>
+
+  <div
+    class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 md:flex-nowrap">
     <button
-      class="rounded-md border px-6 py-2 text-sm font-medium transition hover:cursor-pointer"
+      class="h-9 rounded-md border px-3 text-xs font-medium transition hover:cursor-pointer sm:px-4 sm:text-sm"
       [class]="filterClass('gainers')"
       [attr.aria-pressed]="marketState.sort() === 'gainers'"
       (click)="marketState.changeTopGainers()">
@@ -13,7 +15,7 @@
     </button>
 
     <button
-      class="rounded-md border px-6 py-2 text-sm font-medium transition hover:cursor-pointer"
+      class="h-9 rounded-md border px-3 text-xs font-medium transition hover:cursor-pointer sm:px-4 sm:text-sm"
       [class]="filterClass('losers')"
       [attr.aria-pressed]="marketState.sort() === 'losers'"
       (click)="marketState.changeTopLosers()">
@@ -23,7 +25,7 @@
     <input
       type="text"
       name="coin-name-symbol"
-      class="flex-1 min-w-0 rounded-md border border-outline-variant px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:outline-none transition-colors duration-100"
+      class="col-span-2 h-9 min-w-0 rounded-md border border-outline-variant px-3 text-sm text-on-surface placeholder:text-on-surface-variant transition-colors duration-100 focus:border-primary focus:outline-none sm:col-span-2 sm:flex-1 md:w-48 md:flex-none"
       placeholder="Filter coins..."
       autocomplete="off"
       (input)="setFilter($event)" />

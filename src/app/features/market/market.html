@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-8">
-  <div class="grid grid-cols-3 gap-8">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
     @if (marketState.geckoGlobal.isLoading()) {
       @for (kpi of [0, 1, 2]; track $index) {
         <app-kpi-item-skeleton />

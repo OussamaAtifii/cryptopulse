@@ -8,5 +8,12 @@ import { Sidebar } from '../components/sidebar/sidebar';
   selector: 'app-main-layout',
   imports: [RouterOutlet, Sidebar, Breadcrumbs],
   templateUrl: './main-layout.html',
+  styles: `
+    :host {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+    }
+  `,
 })
 export class MainLayout {}
