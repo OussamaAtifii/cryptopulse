@@ -5,19 +5,19 @@
       [coinName]="coinDetailState.coinDetail.value()?.name ?? ''"
       size="big" />
 
-    <div class="flex flex-col gap-2 text-on-surface font-semibold">
+    <div class="flex flex-col sm:gap-2 text-on-surface font-semibold">
       <div class="flex gap-3 items-center justify-start">
-        <p class="text-3xl font-sora">
+        <p class="text-2xl sm:text-3xl font-sora">
           {{ coinDetailState.coinDetail.value()?.name }}
         </p>
         <p
-          class="bg-surface-container-high uppercase border border-outline rounded-md px-2 py-1">
+          class="bg-surface-container-high uppercase border border-outline rounded-md px-2 py-1 text-sm sm:text-base">
           {{ coinDetailState.coinDetail.value()?.symbol }}
         </p>
       </div>
 
       <div class="flex gap-3 items-center justify-start">
-        <p class="text-xl tabular-nums">
+        <p class="text-lg sm:text-xl tabular-nums">
           {{
             coinDetailState.coinDetail.value()?.market_data?.current_price?.[
               'usd'
