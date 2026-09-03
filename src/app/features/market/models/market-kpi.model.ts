@@ -3,4 +3,5 @@ export interface MarketKpi {
   value: string | number;
   hasPercentage: boolean;
   percentage?: number;
+  unit?: string;
 }

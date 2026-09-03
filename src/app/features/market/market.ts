@@ -49,7 +49,7 @@ export class Market {
             '1.2-2'
           ) ?? 0,
         hasPercentage: false,
-        percentage: geckoGlobal.market_cap_change_percentage_24h_usd,
+        unit: '%',
       },
     ];
   });

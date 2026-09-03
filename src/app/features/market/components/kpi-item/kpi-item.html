@@ -5,6 +5,12 @@
   <div class="flex items-center justify-between gap-2 sm:gap-4">
     <p class="font-sora text-2xl font-semibold tracking-tight text-on-surface">
       {{ kpi().value }}
+
+      @if (kpi().unit) {
+        <span>
+          {{ kpi().unit }}
+        </span>
+      }
     </p>
 
     @if (kpi().hasPercentage && kpi().percentage) {
