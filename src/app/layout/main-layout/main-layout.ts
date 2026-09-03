@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Menu } from '@icons/menu/menu';
 import { Breadcrumbs } from '@layout/components/breadcrumbs/breadcrumbs';
@@ -10,6 +10,9 @@ import { Sidebar } from '../components/sidebar/sidebar';
   selector: 'app-main-layout',
   imports: [RouterOutlet, Sidebar, Breadcrumbs, Menu],
   templateUrl: './main-layout.html',
+  host: {
+    '(keydown.escape)': 'closeSidebar()',
+  },
   styles: `
     :host {
       display: block;
@@ -21,7 +24,6 @@ import { Sidebar } from '../components/sidebar/sidebar';
 export class MainLayout {
   protected readonly sidebarState = inject(SidebarState);
 
-  @HostListener('document:keydown.escape')
   protected closeSidebar(): void {
     this.sidebarState.closeSidebar();
   }
