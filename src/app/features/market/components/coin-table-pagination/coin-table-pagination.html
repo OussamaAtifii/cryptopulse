@@ -5,11 +5,11 @@
     <app-arrow-left-dashed class="size-4" />
   </app-button>
 
-  @for (item of [0, 1, 2, 3, 4]; track item) {
+  @for (item of [1, 2, 3, 4, 5]; track item) {
     <app-button
       [active]="marketState.page() === item"
       (buttonClicked)="changePage(item)">
-      {{ item + 1 }}
+      {{ item }}
     </app-button>
   }
 

@@ -6,7 +6,7 @@ export class MarketState {
   private readonly coinGeckoApi = inject(CoinGeckoApi);
 
   readonly searchText = signal<string>('');
-  readonly page = signal<number>(0);
+  readonly page = signal<number>(1);
   readonly sort = signal<'gainers' | 'losers' | null>(null);
   readonly debouncedSearch = debounced(this.searchText, 300);
 
@@ -48,10 +48,20 @@ export class MarketState {
   }
 
   changeTopGainers() {
+    if (this.sort() === 'gainers') {
+      this.sort.set(null);
+      return;
+    }
+
     this.sort.set('gainers');
   }
 
   changeTopLosers() {
+    if (this.sort() === 'losers') {
+      this.sort.set(null);
+      return;
+    }
+
     this.sort.set('losers');
   }
 
