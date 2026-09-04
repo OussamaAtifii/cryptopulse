@@ -1,12 +1,13 @@
 <a
   [routerLink]="item().route"
-  routerLinkActive="active bg-primary/10 text-primary border-s-primary"
-  class="group flex h-12 items-center gap-3 rounded-r-md border-s-2 border-transparent px-3 text-on-surface-variant transition-colors duration-150 font-sora hover:bg-surface-container hover:text-on-surface [&.active:hover]:bg-primary/10 [&.active:hover]:text-primary">
+  routerLinkActive="active"
+  ariaCurrentWhenActive="page"
+  class="flex h-11 items-center gap-3 rounded-md border-transparent px-3 font-inter text-sm font-medium text-on-surface-variant outline-none transition-colors duration-150 hover:bg-surface-container hover:text-on-surface focus-visible:bg-surface-container focus-visible:ring-2 focus-visible:ring-primary/30 [&.active]:border-s-primary [&.active]:bg-primary/10 [&.active]:text-primary">
   <!-- Icon -->
   <ng-container
     [ngComponentOutlet]="item().icon"
     [ngComponentOutletInputs]="{ class: 'size-5 shrink-0' }" />
 
   <!-- Title -->
-  <span class="text-base font-medium tracking-tight">{{ item().title }}</span>
+  <span class="truncate">{{ item().title }}</span>
 </a>
