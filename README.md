@@ -1,59 +1,67 @@
-# Cryptopulse
+# CryptoPulse
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+A clean cryptocurrency dashboard built with Angular. It lets you browse the market, inspect coin details and track a portfolio from one place.
 
-## Development server
+Market data is provided by the [CoinGecko API](https://www.coingecko.com/en/api).
 
-To start a local development server, run:
+![CryptoPulse market dashboard](docs/images/crypto-pulse-market.png)
 
-```bash
-ng serve
+## Features
+
+- Market overview with global metrics and a paginated coin list
+- Coin detail pages with price charts and key statistics
+- Portfolio section
+- Loading skeletons for a smoother experience
+- Responsive layout with breadcrumbs and sidebar navigation
+
+## Tech stack
+
+- Angular 22
+- TypeScript
+- Tailwind CSS
+- Angular Signals and RxJS
+- Lightweight Charts
+- Vitest
+
+## Project structure
+
+The project follows a **feature-based** structure. Code that belongs to one user-facing area stays together, making it easier to find, change and scale.
+
+```text
+src/app/
+├── core/        # App-wide services, API clients and shared data models
+├── features/    # Product areas: market, coin detail and portfolio
+├── layout/      # Main layout, sidebar and breadcrumbs
+└── shared/      # Reusable UI components, icons and pipes
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Each feature can contain its page, feature-specific components, state services and models when needed. Shared code is only moved to `shared` or `core` when it is useful across more than one feature.
 
-## Code scaffolding
+## Getting started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Requirements
 
-```bash
-ng generate component component-name
-```
+- Node.js
+- pnpm 11 or later
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Install and run
 
 ```bash
-ng build
+pnpm install
+pnpm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Open `http://localhost:4200` in your browser.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Available commands
 
 ```bash
-ng test
+pnpm start   # Start the development server
+pnpm build   # Create a production build
+pnpm test    # Run unit tests
+pnpm lint    # Check the code with ESLint
 ```
 
-## Running end-to-end tests
+## Data source
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Crypto prices, market information and chart data come from the public CoinGecko API. API requests are kept in `src/app/core/services/coin-gecko-api.ts` so UI components stay focused on presentation.
