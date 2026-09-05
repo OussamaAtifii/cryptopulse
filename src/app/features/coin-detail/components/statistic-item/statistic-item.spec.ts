@@ -13,10 +13,13 @@ describe('StatisticItem', () => {
 
     fixture = TestBed.createComponent(StatisticItem);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {
+    fixture.componentRef.setInput('title', 'Test title');
+    fixture.componentRef.setInput('value', 2);
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
 });

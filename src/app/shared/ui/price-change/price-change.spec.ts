@@ -6,6 +6,8 @@ describe('PriceChange', () => {
   let component: PriceChange;
   let fixture: ComponentFixture<PriceChange>;
 
+  const mockPercentage = 50;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PriceChange],
@@ -13,6 +15,8 @@ describe('PriceChange', () => {
 
     fixture = TestBed.createComponent(PriceChange);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('percentage', mockPercentage);
     await fixture.whenStable();
   });
 

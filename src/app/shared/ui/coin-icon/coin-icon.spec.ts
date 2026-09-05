@@ -6,6 +6,9 @@ describe('CoinIcon', () => {
   let component: CoinIcon;
   let fixture: ComponentFixture<CoinIcon>;
 
+  const mockCoinImage = 'https://image.com';
+  const mockCoinName = 'Bitcoin';
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CoinIcon],
@@ -13,6 +16,10 @@ describe('CoinIcon', () => {
 
     fixture = TestBed.createComponent(CoinIcon);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('coinImage', mockCoinImage);
+    fixture.componentRef.setInput('coinName', mockCoinName);
+
     await fixture.whenStable();
   });
 

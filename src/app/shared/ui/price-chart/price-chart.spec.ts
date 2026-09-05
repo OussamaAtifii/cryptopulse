@@ -13,6 +13,7 @@ describe('PriceChart', () => {
 
     fixture = TestBed.createComponent(PriceChart);
     component = fixture.componentInstance;
+
     await fixture.whenStable();
   });
 
