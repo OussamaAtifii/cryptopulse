@@ -1,12 +1,14 @@
 import { computed, debounced, inject, Service, signal } from '@angular/core';
 import { CoinGeckoApi } from '@core/services/coin-gecko-api';
 
+import { FIRST_PAGE, LAST_PAGE } from '../market.constants';
+
 @Service()
 export class MarketState {
   private readonly coinGeckoApi = inject(CoinGeckoApi);
 
   readonly searchText = signal<string>('');
-  readonly page = signal<number>(1);
+  readonly page = signal<number>(FIRST_PAGE);
   readonly sort = signal<'gainers' | 'losers' | null>(null);
   readonly debouncedSearch = debounced(this.searchText, 300);
 
@@ -75,12 +77,12 @@ export class MarketState {
   }
 
   nextPage() {
-    if (this.page() === 4) return;
+    if (this.page() === LAST_PAGE) return;
     this.page.update(page => page + 1);
   }
 
   previousPage() {
-    if (this.page() === 0) return;
+    if (this.page() === FIRST_PAGE) return;
     this.page.update(page => page - 1);
   }
 }

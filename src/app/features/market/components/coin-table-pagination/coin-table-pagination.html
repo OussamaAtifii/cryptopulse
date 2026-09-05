@@ -1,21 +1,24 @@
 <div class="flex items-center justify-end gap-1.5">
   <app-button
     (buttonClicked)="marketState.previousPage()"
-    [disabled]="marketState.page() === 0">
+    [disabled]="marketState.page() === 1"
+    data-testid="previous-page-btn">
     <app-arrow-left-dashed class="size-4" />
   </app-button>
 
-  @for (item of [1, 2, 3, 4, 5]; track item) {
+  @for (page of [1, 2, 3, 4, 5]; track page) {
     <app-button
-      [active]="marketState.page() === item"
-      (buttonClicked)="changePage(item)">
-      {{ item }}
+      [active]="marketState.page() === page"
+      (buttonClicked)="changePage(page)"
+      [attr.data-testid]="'page-btn-' + page">
+      {{ page }}
     </app-button>
   }
 
   <app-button
     (buttonClicked)="marketState.nextPage()"
-    [disabled]="marketState.page() === 4">
+    [disabled]="marketState.page() === 4"
+    data-testid="next-page-btn">
     <app-arrow-right-dashed class="size-4" />
   </app-button>
 </div>
