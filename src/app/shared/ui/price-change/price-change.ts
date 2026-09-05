@@ -1,9 +1,9 @@
-import { PercentPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-price-change',
-  imports: [PercentPipe],
+  imports: [DecimalPipe],
   templateUrl: './price-change.html',
 })
 export class PriceChange {

@@ -1,13 +1,19 @@
 <div
   class="flex flex-col justify-between h-28 gap-5 rounded-md border border-outline-variant bg-surface-container-low p-5">
-  <p class="text-sm font-medium text-on-surface-variant">{{ kpi().title }}</p>
+  <p
+    data-testid="kpi-title"
+    class="text-sm font-medium text-on-surface-variant">
+    {{ kpi().title }}
+  </p>
 
   <div class="flex items-center justify-between gap-2 sm:gap-4">
-    <p class="font-sora text-2xl font-semibold tracking-tight text-on-surface">
+    <p
+      data-testid="kpi-value"
+      class="font-sora text-2xl font-semibold tracking-tight text-on-surface">
       {{ kpi().value }}
 
       @if (kpi().unit) {
-        <span>
+        <span data-testid="kpi-unit">
           {{ kpi().unit }}
         </span>
       }

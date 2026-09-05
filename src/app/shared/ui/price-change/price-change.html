@@ -2,5 +2,5 @@
   class="py-1 px-2 rounded-sm text-xs sm:text-sm"
   [class]="percentageClass()">
   {{ percentageIcon() }}
-  {{ percentage() | percent }}
+  {{ percentage() | number: '1.2-2' }}%
 </span>
