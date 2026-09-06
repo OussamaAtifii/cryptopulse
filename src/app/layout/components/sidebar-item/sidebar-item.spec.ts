@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { ChevronRight } from '@icons/chevron-right/chevron-right';
 import { SidebarItem as SidebarItemType } from '@layout/models/sidebar-item.model';
 
@@ -17,6 +18,7 @@ describe('SidebarItem', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SidebarItem],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SidebarItem);
