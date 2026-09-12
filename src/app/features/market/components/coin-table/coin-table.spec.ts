@@ -28,6 +28,18 @@ interface Coin {
   total_volume: number;
 }
 
+const mockCoin: Coin = {
+  id: 'bitcoin',
+  name: 'Bitcoin',
+  symbol: 'btc',
+  image:
+    'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
+  current_price: 77343,
+  price_change_percentage_24h: -0.72455,
+  market_cap: 1553306741339,
+  total_volume: 18715319967,
+};
+
 describe('CoinTable', () => {
   let component: CoinTable;
   let fixture: ComponentFixture<CoinTable>;
@@ -40,6 +52,11 @@ describe('CoinTable', () => {
     };
     filteredCoins: ReturnType<typeof signal<Coin[]>>;
   };
+
+  function setFilteredCoins() {
+    mockMarketState.filteredCoins.set([mockCoin]);
+    fixture.detectChanges();
+  }
 
   beforeEach(async () => {
     mockMarketState = {
@@ -103,19 +120,7 @@ describe('CoinTable', () => {
   });
 
   it('should not render skeleton rows or error message when coins are loaded successfully', () => {
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
+    setFilteredCoins();
 
     const skeletonRows = compiled.querySelectorAll('tr[coinTableSkeleton]');
     const errorRow = compiled.querySelector(
@@ -159,19 +164,7 @@ describe('CoinTable', () => {
   });
 
   it('should display coin name and symbol', () => {
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
+    setFilteredCoins();
 
     const coinRows = compiled.querySelectorAll('[data-testid="coin-row"]');
     expect(coinRows.length).toBe(1);
@@ -184,44 +177,20 @@ describe('CoinTable', () => {
   });
 
   it('should format current_price with the currency pipe', () => {
+    setFilteredCoins();
+
     const currencyPipe = new CurrencyPipe('en-US');
-
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
-
     const currentPriceCell = compiled.querySelector(
       '[data-testid="current-price-cell"]'
     );
+
     const expected = currencyPipe.transform(mockCoin.current_price);
 
     expect(currentPriceCell?.textContent.trim()).toBe(expected);
   });
 
   it('should pass the correct percentage to app-price-change', () => {
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
+    setFilteredCoins();
 
     const priceChangeDebugEl = fixture.debugElement.query(
       By.directive(PriceChange)
@@ -233,20 +202,9 @@ describe('CoinTable', () => {
   });
 
   it('should format market_cap and total_volume with shortCurrency', () => {
+    setFilteredCoins();
+
     const shortCurrencyPipe = new ShortCurrencyPipe();
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
 
     const coinRows = compiled.querySelectorAll('[data-testid="coin-row"]');
     const marketCap = coinRows[0].querySelector(
@@ -275,22 +233,10 @@ describe('CoinTable', () => {
   });
 
   it('should call navigateToCoinDetail with the coin id when a row is clicked', () => {
+    setFilteredCoins();
+
     const router = TestBed.inject(Router);
     const navigateSpy = vi.spyOn(router, 'navigate');
-
-    const mockCoin: Coin = {
-      id: 'bitcoin',
-      name: 'Bitcoin',
-      symbol: 'btc',
-      image:
-        'https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400',
-      current_price: 77343,
-      price_change_percentage_24h: -0.72455,
-      market_cap: 1553306741339,
-      total_volume: 18715319967,
-    };
-    mockMarketState.filteredCoins.set([mockCoin]);
-    fixture.detectChanges();
 
     const row = compiled.querySelector(
       '[data-testid="coin-row"]'
