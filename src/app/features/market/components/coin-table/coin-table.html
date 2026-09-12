@@ -21,7 +21,7 @@
               <tr coinTableSkeleton></tr>
             }
           } @else if (marketState.market.error()) {
-            <tr>
+            <tr data-testid="market-data-error-row">
               <td colspan="5">
                 <div
                   class="flex flex-col items-center justify-center gap-2 py-12">
@@ -38,7 +38,8 @@
             @for (coin of marketState.filteredCoins(); track coin.id) {
               <tr
                 (click)="navigateToCoinDetail(coin.id)"
-                class="transition-colors duration-200 hover:cursor-pointer hover:bg-surface-container">
+                class="transition-colors duration-200 hover:cursor-pointer hover:bg-surface-container"
+                data-testid="coin-row">
                 <td>
                   <div class="flex items-center gap-3 sm:gap-4">
                     <app-coin-icon
@@ -46,13 +47,17 @@
                       [coinImage]="coin.image" />
 
                     <div>
-                      <p class="font-semibold">{{ coin.name }}</p>
-                      <p class="text-xs uppercase">{{ coin.symbol }}</p>
+                      <p class="font-semibold" data-testid="coin-name">
+                        {{ coin.name }}
+                      </p>
+                      <p class="text-xs uppercase" data-testid="coin-symbol">
+                        {{ coin.symbol }}
+                      </p>
                     </div>
                   </div>
                 </td>
 
-                <td class="font-semibold">
+                <td class="font-semibold" data-testid="current-price-cell">
                   {{ coin.current_price | currency: 'USD' }}
                 </td>
 
@@ -61,9 +66,13 @@
                     [percentage]="coin.price_change_percentage_24h" />
                 </td>
 
-                <td>{{ coin.market_cap | shortCurrency }}</td>
+                <td data-testid="market-cap-cell">
+                  {{ coin.market_cap | shortCurrency }}
+                </td>
 
-                <td>{{ coin.total_volume | shortCurrency }}</td>
+                <td data-testid="total-volume-cell">
+                  {{ coin.total_volume | shortCurrency }}
+                </td>
               </tr>
             }
           }
