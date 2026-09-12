@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 
 import { CoinTable } from './components/coin-table/coin-table';
@@ -14,10 +15,15 @@ import { MarketState } from './services/market-state';
   templateUrl: './market.html',
 })
 export class Market {
+  private readonly title = inject(Title);
   protected readonly marketState = inject(MarketState);
 
   private readonly shortCurrencyPipe = inject(ShortCurrencyPipe);
   private readonly decimalPipe = inject(DecimalPipe);
+
+  constructor() {
+    this.title.setTitle('Cryptopulse');
+  }
 
   kpis = computed<MarketKpi[]>(() => {
     const geckoGlobal = this.marketState.geckoGlobal.value()?.data;

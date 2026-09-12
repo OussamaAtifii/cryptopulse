@@ -12,6 +12,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ChartDays, ChartDaysLabel } from '@core/models/chart-days.model';
 import { PricePoint } from '@core/models/price-point.model';
 import { ChartBar } from '@icons/chart-bar/chart-bar';
@@ -61,6 +62,7 @@ interface ExternalLink {
   templateUrl: './coin-detail.html',
 })
 export class CoinDetail {
+  private readonly title = inject(Title);
   protected readonly coinDetailState = inject(CoinDetailState);
 
   protected readonly ChartDays = ChartDays;
@@ -72,8 +74,12 @@ export class CoinDetail {
 
   constructor() {
     effect(() => {
-      this.coinDetailState.setCoinId(this.id());
+      const coinId = this.id();
+
+      this.coinDetailState.setCoinId(coinId);
       this.isDescriptionExpanded.set(false);
+
+      this.title.setTitle(`${coinId} | Cryptopulse`);
     });
   }
 
