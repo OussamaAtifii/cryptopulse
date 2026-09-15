@@ -14,6 +14,21 @@ Market data is provided by the [CoinGecko API](https://www.coingecko.com/en/api)
 - Loading skeletons for a smoother experience
 - Responsive layout with breadcrumbs and sidebar navigation
 
+## Angular 22
+
+CryptoPulse takes advantage of modern Angular APIs and patterns introduced in recent Angular versions:
+
+- Signals for reactive local and feature state
+- Computed signals for derived state
+- Effects for reacting to signal changes when needed
+- httpResource for reactive HTTP data fetching
+- Signal Forms for type-safe, signal-based form management and validation
+- Signal-based viewChild queries
+- inject() for dependency injection
+- Route input binding to pass route parameters directly into components
+
+The project follows Angular's modern signal-first approach, keeping components reactive while avoiding unnecessary state management complexity.
+
 ## Tech stack
 
 - Angular 22
@@ -22,6 +37,8 @@ Market data is provided by the [CoinGecko API](https://www.coingecko.com/en/api)
 - Angular Signals and RxJS
 - Lightweight Charts
 - Vitest
+- ESLint
+- pnpm
 
 ## Project structure
 
