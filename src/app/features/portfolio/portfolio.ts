@@ -1,9 +1,76 @@
-import { Component } from '@angular/core';
-import { BarrierBlock } from '@icons/barrier-block/barrier-block';
+import { CurrencyPipe } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import {
+  form,
+  FormField,
+  FormRoot,
+  min,
+  required,
+} from '@angular/forms/signals';
+import { Modal } from '@shared/ui/modal/modal';
+
+import { PortfolioState } from './services/portfolio-state';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [BarrierBlock],
+  imports: [CurrencyPipe, FormField, FormRoot, Modal],
   templateUrl: './portfolio.html',
 })
-export class Portfolio {}
+export class Portfolio {
+  protected readonly portfolioState = inject(PortfolioState);
+
+  protected readonly isTransactionModalOpen = signal(false);
+
+  transactionModel = signal({
+    coinId: '',
+    amount: 0,
+  });
+
+  transactionForm = form(
+    this.transactionModel,
+    transaction => {
+      required(transaction.coinId);
+      min(transaction.amount, 0.000001);
+    },
+    {
+      submission: {
+        action: async field => {
+          const value = field().value();
+
+          this.portfolioState.addTransaction({
+            coinId: value.coinId,
+            amount: value.amount,
+          });
+        },
+      },
+    }
+  );
+
+  readonly transactionValue = computed(() => {
+    const coinId = this.transactionForm.coinId().value();
+    const amount = this.transactionForm.amount().value();
+
+    const simplePrice = this.portfolioState.simplePrice.value();
+
+    if (!simplePrice) return 0;
+
+    const coin = simplePrice[coinId];
+
+    if (!coin || !amount) {
+      return 0;
+    }
+
+    return amount * coin.usd;
+  });
+
+  readonly coinPrice = computed(() => {
+    const coinId = this.transactionForm.coinId().value();
+    const simplePrice = this.portfolioState.simplePrice.value();
+
+    if (!simplePrice || !coinId) return 0;
+
+    const coin = simplePrice[coinId];
+
+    return coin?.usd ?? 0;
+  });
+}
