@@ -1,83 +1,102 @@
 <div class="flex flex-col gap-2">
   <div class="min-w-0">
-    <app-coin-filters />
+    <div
+      class="overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-low">
+      <!-- Header -->
+      <div
+        class="flex flex-col justify-between gap-4 border-b border-outline-variant p-4 lg:items-center lg:flex-row md:px-6 md:py-5">
+        <h2 class="text-lg font-semibold text-white sm:text-xl md:text-2xl">
+          Market Trends
+        </h2>
 
-    <div class="w-full overflow-x-auto">
-      <table
-        class="bg-surface-container-low min-w-175 w-full rounded-sm text-sm text-on-surface [&_tr]:border-b-2 [&_tr]:border-b-outline-variant [&_th]:py-3 [&_td]:px-4 [&_td]:py-3 [&_td]:text-right [&_th]:text-right [&_th]:font-normal [&_th:first-child]:text-left [&_th:first-child]:pl-4 [&_th:last-child]:pr-4 [&_td:first-child]:text-left sm:[&_td]:px-3 sm:[&_th:first-child]:pl-3 sm:[&_th:last-child]:pr-3 sm:[&_td:first-child]:pl-3 sm:[&_td:last-child]:pr-3">
-        <thead class="text-on-surface">
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>24h Change</th>
-            <th>Market Cap</th>
-            <th>Volume (24h)</th>
-          </tr>
-        </thead>
+        <app-coin-filters />
+      </div>
 
-        <tbody>
-          @if (marketState.market.isLoading()) {
-            @for (_ of [1, 2, 3, 4, 5]; track $index) {
-              <tr coinTableSkeleton></tr>
-            }
-          } @else if (marketState.market.error()) {
-            <tr data-testid="market-data-error-row">
-              <td colspan="5">
-                <div
-                  class="flex flex-col items-center justify-center gap-2 py-12">
-                  <p class="text-sm font-medium text-error">
-                    Failed to load market data
-                  </p>
-                  <p class="text-xs text-on-surface-variant">
-                    Please try again later.
-                  </p>
-                </div>
-              </td>
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-175 text-sm text-on-surface">
+          <thead>
+            <tr
+              class="bg-surface-container/40 border-b border-outline-variant text-left text-on-surface-variant">
+              <th class="px-6 py-4 font-medium">Name</th>
+              <th class="px-6 py-4 text-right font-medium">Price</th>
+              <th class="px-6 py-4 text-right font-medium">24h Change</th>
+              <th class="px-6 py-4 text-right font-medium">Market Cap</th>
+              <th class="px-6 py-4 text-right font-medium">Volume (24h)</th>
             </tr>
-          } @else {
-            @for (coin of marketState.filteredCoins(); track coin.id) {
-              <tr
-                (click)="navigateToCoinDetail(coin.id)"
-                class="transition-colors duration-200 hover:cursor-pointer hover:bg-surface-container"
-                data-testid="coin-row">
-                <td>
-                  <div class="flex items-center gap-3 sm:gap-4">
-                    <app-coin-icon
-                      [coinName]="coin.name"
-                      [coinImage]="coin.image" />
+          </thead>
 
-                    <div>
-                      <p class="font-semibold" data-testid="coin-name">
-                        {{ coin.name }}
-                      </p>
-                      <p class="text-xs uppercase" data-testid="coin-symbol">
-                        {{ coin.symbol }}
-                      </p>
-                    </div>
+          <tbody>
+            @if (marketState.market.isLoading()) {
+              @for (_ of [1, 2, 3, 4, 5]; track $index) {
+                <tr coinTableSkeleton></tr>
+              }
+            } @else if (marketState.market.error()) {
+              <tr data-testid="market-data-error-row">
+                <td colspan="5" class="px-6 py-12 text-center">
+                  <div class="flex flex-col items-center gap-2">
+                    <p class="font-medium text-error">
+                      Failed to load market data
+                    </p>
+                    <p class="text-sm text-on-surface-variant">
+                      Please try again later.
+                    </p>
                   </div>
                 </td>
-
-                <td class="font-semibold" data-testid="current-price-cell">
-                  {{ coin.current_price | currency: 'USD' }}
-                </td>
-
-                <td>
-                  <app-price-change
-                    [percentage]="coin.price_change_percentage_24h" />
-                </td>
-
-                <td data-testid="market-cap-cell">
-                  {{ coin.market_cap | shortCurrency }}
-                </td>
-
-                <td data-testid="total-volume-cell">
-                  {{ coin.total_volume | shortCurrency }}
-                </td>
               </tr>
+            } @else {
+              @for (coin of marketState.filteredCoins(); track coin.id) {
+                <tr
+                  (click)="navigateToCoinDetail(coin.id)"
+                  class="group border-b border-outline-variant/60 transition-colors last:border-0 hover:cursor-pointer hover:bg-surface-container/50"
+                  data-testid="coin-row">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <app-coin-icon
+                        [coinName]="coin.name"
+                        [coinImage]="coin.image" />
+
+                      <div>
+                        <p class="font-medium" data-testid="coin-name">
+                          {{ coin.name }}
+                        </p>
+                        <p
+                          class="text-xs uppercase text-on-surface-variant"
+                          data-testid="coin-symbol">
+                          {{ coin.symbol }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td
+                    class="px-6 py-4 text-right font-semibold"
+                    data-testid="current-price-cell">
+                    {{ coin.current_price | currency: 'USD' }}
+                  </td>
+
+                  <td class="px-6 py-4 text-right">
+                    <app-price-change
+                      [percentage]="coin.price_change_percentage_24h" />
+                  </td>
+
+                  <td
+                    class="px-6 py-4 text-right text-on-surface-variant"
+                    data-testid="market-cap-cell">
+                    {{ coin.market_cap | shortCurrency }}
+                  </td>
+
+                  <td
+                    class="px-6 py-4 text-right text-on-surface-variant"
+                    data-testid="total-volume-cell">
+                    {{ coin.total_volume | shortCurrency }}
+                  </td>
+                </tr>
+              }
             }
-          }
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
