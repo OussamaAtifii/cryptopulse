@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import {
   form,
   FormField,
@@ -8,20 +8,20 @@ import {
   required,
 } from '@angular/forms/signals';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
-import { Modal } from '@shared/ui/modal/modal';
+import { Dialog } from '@shared/ui/dialog/dialog';
 import { PriceChange } from '@shared/ui/price-change/price-change';
 
 import { PortfolioState } from './services/portfolio-state';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [CurrencyPipe, FormField, FormRoot, Modal, CoinIcon, PriceChange],
+  imports: [CurrencyPipe, FormField, FormRoot, CoinIcon, PriceChange, Dialog],
   templateUrl: './portfolio.html',
 })
 export class Portfolio {
-  protected readonly portfolioState = inject(PortfolioState);
+  private readonly transactionDialog = viewChild<Dialog>('transactionDialog');
 
-  protected readonly isTransactionModalOpen = signal(false);
+  protected readonly portfolioState = inject(PortfolioState);
 
   transactionModel = signal({
     coinId: '',
@@ -43,6 +43,9 @@ export class Portfolio {
             coinId: value.coinId,
             amount: value.amount,
           });
+
+          this.transactionDialogClosed();
+          this.transactionDialog()?.close();
         },
       },
     }
@@ -75,4 +78,11 @@ export class Portfolio {
 
     return coin?.current_price ?? 0;
   });
+
+  transactionDialogClosed() {
+    this.transactionForm().reset({
+      coinId: '',
+      amount: 0,
+    });
+  }
 }

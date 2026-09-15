@@ -15,7 +15,7 @@
       <button
         type="button"
         class="rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-surface transition-opacity hover:cursor-pointer hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-low"
-        (click)="transactionModal.open()">
+        (click)="transactionDialog.open()">
         New transaction
       </button>
     </div>
@@ -108,7 +108,7 @@
   </div>
 </section>
 
-<app-modal #transactionModal>
+<app-dialog #transactionDialog (closed)="transactionDialogClosed()">
   <span modal-title>New transaction</span>
 
   <span modal-description>Add a cryptocurrency to your portfolio.</span>
@@ -128,7 +128,6 @@
 
         @for (coin of portfolioState.portfolioCoinIds(); track $index) {
           <option [value]="coin">
-            <!-- {{ coin.name }} ({{ coin.symbol.toUpperCase() }}) -->
             {{ coin }}
           </option>
         }
@@ -191,4 +190,4 @@
       }}
     </button>
   </form>
-</app-modal>
+</app-dialog>

@@ -1,14 +1,16 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, ElementRef, output, viewChild } from '@angular/core';
 import { Close } from '@icons/close/close';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'app-dialog',
   imports: [Close],
-  templateUrl: './modal.html',
+  templateUrl: './dialog.html',
 })
-export class Modal {
+export class Dialog {
   private readonly dialog =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+
+  closed = output<void>();
 
   open(): void {
     this.dialog().nativeElement.showModal();
@@ -16,5 +18,9 @@ export class Modal {
 
   close(): void {
     this.dialog().nativeElement.close();
+  }
+
+  dialogClosed() {
+    this.closed.emit();
   }
 }

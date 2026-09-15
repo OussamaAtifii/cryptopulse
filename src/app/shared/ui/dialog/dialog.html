@@ -2,7 +2,8 @@
   #dialog
   tabindex="-1"
   class="fixed inset-0 m-auto w-[96%] sm:w-full max-w-lg rounded-md border border-outline-variant bg-surface-container-low p-6 text-on-surface shadow-xl backdrop:bg-black/70"
-  (cancel)="close()">
+  (cancel)="close()"
+  (close)="dialogClosed()">
   <div class="flex items-center justify-between gap-4">
     <div>
       <h2 class="text-lg font-semibold">
