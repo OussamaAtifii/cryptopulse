@@ -7,6 +7,7 @@ import {
   min,
   required,
 } from '@angular/forms/signals';
+import { ToastService } from '@core/services/toast/toast-service';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { Dialog } from '@shared/ui/dialog/dialog';
 import { PriceChange } from '@shared/ui/price-change/price-change';
@@ -20,6 +21,7 @@ import { PortfolioState } from './services/portfolio-state';
 })
 export class Portfolio {
   private readonly transactionDialog = viewChild<Dialog>('transactionDialog');
+  private readonly toast = inject(ToastService);
 
   protected readonly portfolioState = inject(PortfolioState);
 
@@ -46,6 +48,8 @@ export class Portfolio {
 
           this.transactionDialogClosed();
           this.transactionDialog()?.close();
+
+          this.toast.success('Transaction added successfully');
         },
       },
     }
