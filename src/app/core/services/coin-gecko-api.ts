@@ -5,7 +5,6 @@ import { Coin } from '@core/models/coin.model';
 import { CoinDetailResponse } from '@core/models/coin-detail-response.model';
 import { CoinPriceChart } from '@core/models/coin-price-chart.model';
 import { GeckoGlobalResponse } from '@core/models/gecko-global-response.model';
-import { SimplePrice } from '@core/models/simple-price.model';
 
 @Service()
 export class CoinGeckoApi {
@@ -62,19 +61,14 @@ export class CoinGeckoApi {
     });
   }
 
-  getSimplePrice(portfolioCoinIds: Signal<string[]>) {
-    return httpResource<SimplePrice>(() => {
-      const ids = portfolioCoinIds();
-
-      if (ids.length === 0) return undefined;
-
-      return {
-        url: this.baseUrl + `/simple/price`,
-        params: {
-          vs_currencies: 'usd',
-          ids: ids.join(','),
-        },
-      };
-    });
+  getPortfolioCoins(portfolioCoinIds: Signal<string[]>) {
+    return httpResource<Coin[]>(() => ({
+      url: this.baseUrl + '/coins/markets',
+      params: {
+        ids: portfolioCoinIds().join(','),
+        vs_currency: 'usd',
+        sparkline: true,
+      },
+    }));
   }
 }

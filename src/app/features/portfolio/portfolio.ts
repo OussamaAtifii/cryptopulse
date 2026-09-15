@@ -7,13 +7,15 @@ import {
   min,
   required,
 } from '@angular/forms/signals';
+import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { Modal } from '@shared/ui/modal/modal';
+import { PriceChange } from '@shared/ui/price-change/price-change';
 
 import { PortfolioState } from './services/portfolio-state';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [CurrencyPipe, FormField, FormRoot, Modal],
+  imports: [CurrencyPipe, FormField, FormRoot, Modal, CoinIcon, PriceChange],
   templateUrl: './portfolio.html',
 })
 export class Portfolio {
@@ -50,27 +52,27 @@ export class Portfolio {
     const coinId = this.transactionForm.coinId().value();
     const amount = this.transactionForm.amount().value();
 
-    const simplePrice = this.portfolioState.simplePrice.value();
+    const portfolioCoins = this.portfolioState.portfolioCoins.value();
 
-    if (!simplePrice) return 0;
+    if (!portfolioCoins) return 0;
 
-    const coin = simplePrice[coinId];
+    const coin = portfolioCoins.find(coin => coin.id === coinId);
 
     if (!coin || !amount) {
       return 0;
     }
 
-    return amount * coin.usd;
+    return amount * coin.current_price;
   });
 
   readonly coinPrice = computed(() => {
     const coinId = this.transactionForm.coinId().value();
-    const simplePrice = this.portfolioState.simplePrice.value();
+    const portfolioCoins = this.portfolioState.portfolioCoins.value();
 
-    if (!simplePrice || !coinId) return 0;
+    if (!portfolioCoins || !coinId) return 0;
 
-    const coin = simplePrice[coinId];
+    const coin = portfolioCoins.find(coin => coin.id === coinId);
 
-    return coin?.usd ?? 0;
+    return coin?.current_price ?? 0;
   });
 }

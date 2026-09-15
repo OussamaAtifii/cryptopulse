@@ -24,20 +24,26 @@ export class PortfolioState {
 
   readonly rows = computed(() => {
     const transactions = this.transactions();
-    const simplePrice = this.simplePrice.value();
+    const portfolioCoins = this.portfolioCoins.value();
 
-    if (!simplePrice) {
+    if (!portfolioCoins) {
       return [];
     }
 
     return transactions.map(transaction => {
-      const price = simplePrice[transaction.coinId]?.usd ?? 0;
+      const coin = portfolioCoins.find(coin => coin.id === transaction.coinId);
+
+      const coinPrice = coin?.current_price ?? 0;
 
       return {
-        coinId: transaction.coinId,
+        id: transaction.coinId,
+        symbol: coin?.symbol,
+        name: coin?.name ?? '',
+        image: coin?.image ?? '',
+        priceChangePercentage24h: coin?.price_change_percentage_24h ?? 0,
         amount: transaction.amount,
-        price,
-        value: transaction.amount * price,
+        price: coinPrice,
+        value: transaction.amount * coinPrice,
       };
     });
   });
@@ -46,7 +52,7 @@ export class PortfolioState {
     this.rows().reduce((total, row) => total + row.value, 0)
   );
 
-  readonly simplePrice = this.coinGeckoApi.getSimplePrice(
+  readonly portfolioCoins = this.coinGeckoApi.getPortfolioCoins(
     this.portfolioCoinIds
   );
 
