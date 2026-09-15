@@ -16,9 +16,10 @@ export class PortfolioState {
   ]);
 
   readonly transactions = signal<Transaction[]>([
-    { coinId: 'bitcoin', amount: 3.5 },
+    { coinId: 'bitcoin', amount: 0.02 },
     { coinId: 'ethereum', amount: 1.75 },
     { coinId: 'binancecoin', amount: 7.9 },
+    { coinId: 'ripple', amount: 87 },
   ]);
 
   readonly rows = computed(() => {
