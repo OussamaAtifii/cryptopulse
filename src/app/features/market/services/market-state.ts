@@ -25,8 +25,8 @@ export class MarketState {
 
     const filtered = coins.filter(
       coin =>
-        coin.name.toLowerCase().includes(searchText) ||
-        coin.symbol.toLowerCase().includes(searchText)
+        coin.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(searchText.toLowerCase())
     );
 
     if (sort === 'gainers') {
