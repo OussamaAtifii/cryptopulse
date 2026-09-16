@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import {
   form,
@@ -16,7 +16,15 @@ import { PortfolioState } from './services/portfolio-state';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [CurrencyPipe, FormField, FormRoot, CoinIcon, PriceChange, Dialog],
+  imports: [
+    CurrencyPipe,
+    UpperCasePipe,
+    FormField,
+    FormRoot,
+    CoinIcon,
+    PriceChange,
+    Dialog,
+  ],
   templateUrl: './portfolio.html',
 })
 export class Portfolio {
