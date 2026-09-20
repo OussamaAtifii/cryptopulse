@@ -1,5 +1,6 @@
 import { httpResource } from '@angular/common/http';
 import { Service, Signal } from '@angular/core';
+import { COIN_GECKO_API_BASE } from '@core/constants/coin-gecko-api-base';
 import { ChartDays } from '@core/models/chart-days.model';
 import { Coin } from '@core/models/coin.model';
 import { CoinDetailResponse } from '@core/models/coin-detail-response.model';
@@ -8,7 +9,7 @@ import { GeckoGlobalResponse } from '@core/models/gecko-global-response.model';
 
 @Service()
 export class CoinGeckoApi {
-  private baseUrl = 'https://api.coingecko.com/api/v3';
+  private baseUrl = COIN_GECKO_API_BASE;
 
   getMarkets(params: { page: Signal<number> }) {
     return httpResource<Coin[]>(() => ({
