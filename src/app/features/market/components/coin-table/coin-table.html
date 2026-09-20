@@ -1,5 +1,9 @@
 <div class="flex flex-col gap-2">
   <div class="min-w-0">
+    <div class="flex justify-end mb-2 md:hidden">
+      <app-coin-gecko-attribution />
+    </div>
+
     <div
       class="overflow-hidden rounded-xl border border-outline-variant/60 bg-surface-container-low">
       <!-- Header -->
@@ -100,5 +104,8 @@
     </div>
   </div>
 
-  <app-coin-table-pagination />
+  <div class="flex justify-end md:justify-between">
+    <app-coin-gecko-attribution class="hidden md:block" />
+    <app-coin-table-pagination />
+  </div>
 </div>

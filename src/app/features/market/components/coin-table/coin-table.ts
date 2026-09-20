@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MarketState } from '@features/market/services/market-state';
+import { CoinGeckoAttribution } from '@shared/coin-gecko-attribution/coin-gecko-attribution';
 import { ShortCurrencyPipe } from '@shared/pipes/short-currency-pipe';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { PriceChange } from '@shared/ui/price-change/price-change';
@@ -20,6 +21,7 @@ import { CoinTableSkeleton } from '../coin-table-skeleton/coin-table-skeleton';
     PriceChange,
     CoinTablePagination,
     CoinIcon,
+    CoinGeckoAttribution,
   ],
   templateUrl: './coin-table.html',
 })
