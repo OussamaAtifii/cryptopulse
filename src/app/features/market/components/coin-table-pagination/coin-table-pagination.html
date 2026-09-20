@@ -1,7 +1,7 @@
 <div class="flex items-center justify-end gap-1.5">
   <app-button
     (buttonClicked)="marketState.previousPage()"
-    [disabled]="marketState.page() === 1"
+    [disabled]="marketState.page() === firstPage"
     data-testid="previous-page-btn">
     <app-arrow-left-dashed class="size-4" />
   </app-button>
@@ -17,7 +17,7 @@
 
   <app-button
     (buttonClicked)="marketState.nextPage()"
-    [disabled]="marketState.page() === 4"
+    [disabled]="marketState.page() === lastPage"
     data-testid="next-page-btn">
     <app-arrow-right-dashed class="size-4" />
   </app-button>
