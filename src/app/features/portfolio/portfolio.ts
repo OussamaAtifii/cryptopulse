@@ -12,6 +12,7 @@ import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { Dialog } from '@shared/ui/dialog/dialog';
 import { PriceChange } from '@shared/ui/price-change/price-change';
 
+import { PortfolioSkeleton } from './components/portfolio-skeleton/portfolio-skeleton';
 import { PortfolioState } from './services/portfolio-state';
 
 @Component({
@@ -24,6 +25,7 @@ import { PortfolioState } from './services/portfolio-state';
     CoinIcon,
     PriceChange,
     Dialog,
+    PortfolioSkeleton,
   ],
   templateUrl: './portfolio.html',
 })

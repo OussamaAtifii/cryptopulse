@@ -7,16 +7,10 @@ export class ToastService {
 
   success(message: string) {
     this.toast.success(message, {
+      theme: 'snackbar',
       style: {
-        width: 'auto',
-        maxWidth: '360px',
-        background: '#0b141c',
-        border: 'none',
-        borderRadius: '10px',
         padding: '12px 16px',
-        color: '#f0f6fc',
         fontFamily: 'Inter, sans-serif',
-        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4)',
       },
       iconTheme: {
         primary: '#58a6ff',
@@ -27,16 +21,10 @@ export class ToastService {
 
   error(message: string) {
     this.toast.error(message, {
+      theme: 'snackbar',
       style: {
-        width: 'auto',
-        maxWidth: '360px',
-        background: '#0b141c',
-        border: 'none',
-        borderRadius: '10px',
         padding: '12px 16px',
-        color: '#f0f6fc',
         fontFamily: 'Inter, sans-serif',
-        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4)',
       },
       iconTheme: {
         primary: '#f85149',

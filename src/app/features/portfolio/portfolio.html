@@ -1,116 +1,125 @@
-<section>
-  <div
-    class="rounded-lg border border-outline-variant bg-surface-container-low p-4 text-on-surface sm:p-6">
+@if (portfolioState.portfolioCoins.isLoading()) {
+  <app-portfolio-skeleton />
+} @else {
+  <section>
     <div
-      class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <p class="text-sm font-medium text-on-surface-variant">Total balance</p>
+      class="rounded-lg border border-outline-variant bg-surface-container-low p-4 text-on-surface sm:p-6">
+      <div
+        class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="text-sm font-medium text-on-surface-variant">
+            Total balance
+          </p>
 
-        <p
-          class="mt-2 font-sora text-2xl font-semibold tracking-tight sm:text-4xl">
-          {{
-            portfolioState.totalBalance() | currency: 'USD' : 'symbol' : '1.2-2'
-          }}
-        </p>
+          <p
+            class="mt-2 font-sora text-2xl font-semibold tracking-tight sm:text-4xl">
+            {{
+              portfolioState.totalBalance()
+                | currency: 'USD' : 'symbol' : '1.2-2'
+            }}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-surface transition-opacity hover:cursor-pointer hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-low sm:w-auto"
+          (click)="transactionDialog.open()">
+          New transaction
+        </button>
       </div>
-
-      <button
-        type="button"
-        class="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-surface transition-opacity hover:cursor-pointer hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-low sm:w-auto"
-        (click)="transactionDialog.open()">
-        New transaction
-      </button>
     </div>
-  </div>
-</section>
+  </section>
 
-<section
-  class="mt-6 overflow-hidden rounded-lg border border-outline-variant bg-surface-container-low text-on-surface">
-  <div class="border-b border-outline-variant p-4 sm:p-6">
-    <h2 class="font-semibold">Your portfolio</h2>
+  <section
+    class="mt-6 overflow-hidden rounded-lg border border-outline-variant bg-surface-container-low text-on-surface">
+    <div class="border-b border-outline-variant p-4 sm:p-6">
+      <h2 class="font-semibold">Your portfolio</h2>
 
-    <p class="mt-1 text-sm text-on-surface-variant">
-      Your current cryptocurrency holdings.
-    </p>
-  </div>
+      <p class="mt-1 text-sm text-on-surface-variant">
+        Your current cryptocurrency holdings.
+      </p>
+    </div>
 
-  <div class="overflow-x-auto">
-    <table class="w-full min-w-[680px] text-sm">
-      <thead>
-        <tr
-          class="border-b border-outline-variant bg-surface-container/40 text-left text-on-surface-variant">
-          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Asset</th>
-          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Amount</th>
-          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Price</th>
-          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">24h Change</th>
-          <th class="px-4 py-3 text-right font-medium sm:px-6 sm:py-4">
-            Value
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        @for (row of portfolioState.rows(); track row.id) {
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-170 text-sm">
+        <thead>
           <tr
-            class="group border-b border-outline-variant/60 transition-colors last:border-0 hover:bg-surface-container/50">
-            <!-- Asset -->
-            <td class="px-4 py-3 sm:px-6 sm:py-4">
-              <div class="flex items-center gap-3">
-                <app-coin-icon [coinName]="row.name" [coinImage]="row.image" />
+            class="border-b border-outline-variant bg-surface-container/40 text-left text-on-surface-variant">
+            <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Asset</th>
+            <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Amount</th>
+            <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Price</th>
+            <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">24h Change</th>
+            <th class="px-4 py-3 text-right font-medium sm:px-6 sm:py-4">
+              Value
+            </th>
+          </tr>
+        </thead>
 
-                <div>
-                  <p class="font-medium">
-                    {{ row.name }}
-                  </p>
+        <tbody>
+          @for (row of portfolioState.rows(); track row.id) {
+            <tr
+              class="group border-b border-outline-variant/60 transition-colors last:border-0 hover:bg-surface-container/50">
+              <!-- Asset -->
+              <td class="px-4 py-3 sm:px-6 sm:py-4">
+                <div class="flex items-center gap-3">
+                  <app-coin-icon
+                    [coinName]="row.name"
+                    [coinImage]="row.image" />
 
-                  <p class="text-xs uppercase text-on-surface-variant">
-                    {{ row.symbol }}
+                  <div>
+                    <p class="font-medium">
+                      {{ row.name }}
+                    </p>
+
+                    <p class="text-xs uppercase text-on-surface-variant">
+                      {{ row.symbol }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Amount -->
+              <td class="px-4 py-3 sm:px-6 sm:py-4">
+                <span class="font-medium">
+                  {{ row.amount }}
+                </span>
+              </td>
+
+              <!-- Price -->
+              <td class="px-4 py-3 text-on-surface-variant sm:px-6 sm:py-4">
+                {{ row.price | currency: 'USD' : 'symbol' : '1.2-2' }}
+              </td>
+
+              <!-- Price change percentage (24h) -->
+              <td class="px-4 py-3 sm:px-6 sm:py-4">
+                <app-price-change [percentage]="row.priceChangePercentage24h" />
+              </td>
+
+              <!-- Value -->
+              <td class="px-4 py-3 text-right sm:px-6 sm:py-4">
+                <span class="font-semibold text-primary">
+                  {{ row.value | currency: 'USD' : 'symbol' : '1.2-2' }}
+                </span>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="px-4 py-12 text-center sm:px-6">
+                <div class="flex flex-col items-center gap-2">
+                  <p class="font-medium">No assets yet</p>
+
+                  <p class="text-sm text-on-surface-variant">
+                    Add a transaction to start building your portfolio.
                   </p>
                 </div>
-              </div>
-            </td>
-
-            <!-- Amount -->
-            <td class="px-4 py-3 sm:px-6 sm:py-4">
-              <span class="font-medium">
-                {{ row.amount }}
-              </span>
-            </td>
-
-            <!-- Price -->
-            <td class="px-4 py-3 text-on-surface-variant sm:px-6 sm:py-4">
-              {{ row.price | currency: 'USD' : 'symbol' : '1.2-2' }}
-            </td>
-
-            <!-- Price change percentage (24h) -->
-            <td class="px-4 py-3 sm:px-6 sm:py-4">
-              <app-price-change [percentage]="row.priceChangePercentage24h" />
-            </td>
-
-            <!-- Value -->
-            <td class="px-4 py-3 text-right sm:px-6 sm:py-4">
-              <span class="font-semibold text-primary">
-                {{ row.value | currency: 'USD' : 'symbol' : '1.2-2' }}
-              </span>
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="5" class="px-4 py-12 text-center sm:px-6">
-              <div class="flex flex-col items-center gap-2">
-                <p class="font-medium">No assets yet</p>
-
-                <p class="text-sm text-on-surface-variant">
-                  Add a transaction to start building your portfolio.
-                </p>
-              </div>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</section>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+}
 
 <app-dialog #transactionDialog (closed)="transactionDialogClosed()">
   <span modal-title>New transaction</span>

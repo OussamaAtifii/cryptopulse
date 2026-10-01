@@ -1,0 +1,93 @@
+<section aria-busy="true" aria-live="polite">
+  <!-- Total balance -->
+  <div
+    class="rounded-lg border border-outline-variant bg-surface-container-low p-4 sm:p-6">
+    <div
+      class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm font-medium text-on-surface-variant">Total balance</p>
+
+        <div
+          class="mt-2 h-8 w-40 animate-pulse rounded-sm bg-surface-container sm:h-10 sm:w-56"></div>
+      </div>
+
+      <div
+        class="h-10 w-full animate-pulse rounded-md bg-surface-container sm:w-36"></div>
+    </div>
+  </div>
+</section>
+
+<section
+  class="mt-6 overflow-hidden rounded-lg border border-outline-variant bg-surface-container-low text-on-surface">
+  <div class="border-b border-outline-variant p-4 sm:p-6">
+    <h2 class="font-semibold">Your portfolio</h2>
+
+    <p class="mt-1 text-sm text-on-surface-variant">
+      Your current cryptocurrency holdings.
+    </p>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full min-w-170 text-sm">
+      <thead>
+        <tr
+          class="border-b border-outline-variant bg-surface-container/40 text-left text-on-surface-variant">
+          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Asset</th>
+          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Amount</th>
+          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">Price</th>
+          <th class="px-4 py-3 font-medium sm:px-6 sm:py-4">24h Change</th>
+          <th class="px-4 py-3 text-right font-medium sm:px-6 sm:py-4">
+            Value
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (i of [1, 2, 3, 4, 5]; track i) {
+          <tr
+            class="border-b border-outline-variant/60 last:border-0"
+            aria-hidden="true">
+            <!-- Asset -->
+            <td class="px-4 py-3 sm:px-6 sm:py-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="size-8 shrink-0 animate-pulse rounded-full bg-surface-container"></div>
+
+                <div class="flex flex-col gap-1.5">
+                  <div
+                    class="h-4 w-24 animate-pulse rounded-sm bg-surface-container"></div>
+                  <div
+                    class="h-3 w-10 animate-pulse rounded-sm bg-surface-container"></div>
+                </div>
+              </div>
+            </td>
+
+            <!-- Amount -->
+            <td class="px-4 py-3 sm:px-6 sm:py-4">
+              <div
+                class="h-4 w-12 animate-pulse rounded-sm bg-surface-container"></div>
+            </td>
+
+            <!-- Price -->
+            <td class="px-4 py-3 sm:px-6 sm:py-4">
+              <div
+                class="h-4 w-20 animate-pulse rounded-sm bg-surface-container"></div>
+            </td>
+
+            <!-- 24h Change -->
+            <td class="px-4 py-3 sm:px-6 sm:py-4">
+              <div
+                class="h-4 w-14 animate-pulse rounded-sm bg-surface-container"></div>
+            </td>
+
+            <!-- Value -->
+            <td class="px-4 py-3 sm:px-6 sm:py-4">
+              <div
+                class="ml-auto h-4 w-20 animate-pulse rounded-sm bg-surface-container"></div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
