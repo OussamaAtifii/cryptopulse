@@ -43,8 +43,8 @@ export class Portfolio {
   transactionForm = form(
     this.transactionModel,
     transaction => {
-      required(transaction.coinId);
-      min(transaction.amount, 0.000001);
+      required(transaction.coinId, { message: 'Coin is required' });
+      min(transaction.amount, 0.000001, { message: 'Amount is required' });
     },
     {
       submission: {

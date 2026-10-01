@@ -132,18 +132,28 @@
         Cryptocurrency
       </label>
 
-      <select
-        id="coin"
-        [formField]="transactionForm.coinId"
-        class="rounded-md border border-outline-variant bg-surface-container px-3 py-2.5 text-sm outline-none focus:border-primary">
-        <option value="" disabled>Select a cryptocurrency</option>
+      <div class="flex flex-col gap-1">
+        <select
+          id="coin"
+          [formField]="transactionForm.coinId"
+          class="rounded-md border border-outline-variant bg-surface-container px-3 py-2.5 text-sm outline-none focus:border-primary">
+          <option value="" disabled>Select a cryptocurrency</option>
 
-        @for (coin of portfolioState.portfolioCoins.value(); track $index) {
-          <option [value]="coin.id">
-            {{ coin.symbol | uppercase }} - {{ coin.name }}
-          </option>
+          @for (coin of portfolioState.portfolioCoins.value(); track $index) {
+            <option [value]="coin.id">
+              {{ coin.symbol | uppercase }} - {{ coin.name }}
+            </option>
+          }
+        </select>
+        @if (
+          transactionForm.coinId().touched() &&
+          transactionForm.coinId().invalid()
+        ) {
+          @for (error of transactionForm.coinId().errors(); track error.kind) {
+            <small class="text-error text-xs">{{ error.message }}</small>
+          }
         }
-      </select>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -153,13 +163,26 @@
           Amount
         </label>
 
-        <input
-          [formField]="transactionForm.amount"
-          id="amount"
-          type="number"
-          step="any"
-          placeholder="0.00"
-          class="rounded-md border border-outline-variant bg-surface-container px-3 py-2.5 text-sm outline-none focus:border-primary" />
+        <div class="flex flex-col gap-1">
+          <input
+            [formField]="transactionForm.amount"
+            id="amount"
+            type="number"
+            step="any"
+            placeholder="0.00"
+            class="rounded-md border border-outline-variant bg-surface-container px-3 py-2.5 text-sm outline-none focus:border-primary" />
+          @if (
+            transactionForm.amount().touched() &&
+            transactionForm.amount().invalid()
+          ) {
+            @for (
+              error of transactionForm.amount().errors();
+              track error.kind
+            ) {
+              <small class="text-error text-xs">{{ error.message }}</small>
+            }
+          }
+        </div>
       </div>
 
       <!-- Price per coin -->
