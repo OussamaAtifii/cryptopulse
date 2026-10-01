@@ -58,7 +58,8 @@
         <tbody>
           @for (row of portfolioState.rows(); track row.id) {
             <tr
-              class="group border-b border-outline-variant/60 transition-colors last:border-0 hover:bg-surface-container/50">
+              class="group border-b border-outline-variant/60 transition-colors last:border-0 hover:bg-surface-container/50"
+              [class.bg-success/5]="modifiedCoinId() === row.id">
               <!-- Asset -->
               <td class="px-4 py-3 sm:px-6 sm:py-4">
                 <div class="flex items-center gap-3">
@@ -97,9 +98,27 @@
 
               <!-- Value -->
               <td class="px-4 py-3 text-right sm:px-6 sm:py-4">
-                <span class="font-semibold text-primary">
-                  {{ row.value | currency: 'USD' : 'symbol' : '1.2-2' }}
-                </span>
+                <div class="flex items-center justify-end gap-2">
+                  @if (modifiedCoinId() === row.id && previousValue !== null) {
+                    <div
+                      class="flex items-center gap-2"
+                      animate.enter="previous-value-enter"
+                      animate.leave="previous-value-leave">
+                      <span class="text-on-surface-variant">
+                        {{
+                          previousValue() | currency: 'USD' : 'symbol' : '1.2-2'
+                        }}
+                      </span>
+
+                      <app-arrow-right-dashed
+                        class="text-on-surface-variant size-4" />
+                    </div>
+                  }
+
+                  <span class="font-semibold text-primary">
+                    {{ row.value | currency: 'USD' : 'symbol' : '1.2-2' }}
+                  </span>
+                </div>
               </td>
             </tr>
           } @empty {

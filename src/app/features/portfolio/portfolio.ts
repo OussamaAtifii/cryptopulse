@@ -1,5 +1,12 @@
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import {
   form,
   FormField,
@@ -8,6 +15,7 @@ import {
   required,
 } from '@angular/forms/signals';
 import { ToastService } from '@core/services/toast/toast-service';
+import { ArrowRightDashed } from '@icons/arrow-right-dashed/arrow-right-dashed';
 import { CoinIcon } from '@shared/ui/coin-icon/coin-icon';
 import { Dialog } from '@shared/ui/dialog/dialog';
 import { PriceChange } from '@shared/ui/price-change/price-change';
@@ -26,14 +34,29 @@ import { PortfolioState } from './services/portfolio-state';
     PriceChange,
     Dialog,
     PortfolioSkeleton,
+    ArrowRightDashed,
   ],
   templateUrl: './portfolio.html',
+  styleUrl: 'portfolio.css',
 })
 export class Portfolio {
   private readonly transactionDialog = viewChild<Dialog>('transactionDialog');
   private readonly toast = inject(ToastService);
 
   protected readonly portfolioState = inject(PortfolioState);
+
+  readonly modifiedCoinId = signal<string | null>(null);
+  readonly previousValue = signal<number | null>(null);
+
+  private readonly modifiedCoinEffect = effect(() => {
+    const id = this.modifiedCoinId();
+
+    if (!id) return;
+
+    setTimeout(() => {
+      this.modifiedCoinId.set(null);
+    }, 5000);
+  });
 
   transactionModel = signal({
     coinId: '',
@@ -50,6 +73,14 @@ export class Portfolio {
       submission: {
         action: async field => {
           const value = field().value();
+
+          this.modifiedCoinId.set(value.coinId);
+
+          const row = this.portfolioState
+            .rows()
+            .find(row => row.id === value.coinId);
+
+          this.previousValue.set(row?.value ?? null);
 
           this.portfolioState.addTransaction({
             coinId: value.coinId,
